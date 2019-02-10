@@ -74,7 +74,7 @@ class Color {
     
     static let primary = UIColor(hexString: "FFCC33")
     static let secondary = UIColor(hexString: "2F91FF")
-    static let grey = UIColor(hexString: "E1E1E1")
+    static let gray = UIColor(hexString: "E1E1E1")
     static let pinkShadow = UIColor(hexString: "FF8FDE")
     static let orangeShadow = UIColor(hexString: "FF8847")
     static let greenShadow = UIColor(hexString: "1FA22F")

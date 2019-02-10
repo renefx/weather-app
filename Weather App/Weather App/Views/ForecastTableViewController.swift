@@ -24,21 +24,10 @@ class ForecastTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView(frame: CGRect(x: 0, y: 0, width: self.screenWidth, height: headerHeight))
-        if (section != 0) {
-            let topLine = UIView(frame: CGRect(x: 0, y: 0, width: self.screenWidth, height: lineHeight))
-            topLine.backgroundColor = Color.grey
-            header.addSubview(topLine)
-        }
-        
-        let label = UILabel(frame: CGRect(x: 0, y: lineHeight, width: self.screenWidth, height:  headerHeight))
-        label.backgroundColor = .white
-        label.text = "TODAY"
-        header.addSubview(label)
-        
-        let bottomLine = UIView(frame: CGRect(x: 0, y: headerHeight - lineHeight, width: self.screenWidth, height: lineHeight))
-        bottomLine.backgroundColor = Color.grey
-        header.addSubview(bottomLine)
+        var header: ForecastSectionHeader
+        let headerFrame = CGRect(x: 0, y: 0, width: self.screenWidth, height: headerHeight)
+        let hideTopLine = section != 0
+        header = ForecastSectionHeader(frame: headerFrame, title: "TODAY", hideTopLine: hideTopLine)
         return header
     }
     
@@ -51,18 +40,20 @@ class ForecastTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 5
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "weatherInformationIdentifier", for: indexPath)
-        if let forecastInformationCell = cell as? ForecastTableViewCell {
-            
-            return forecastInformationCell
+        guard let forecastInformationCell = cell as? ForecastTableViewCell else {
+            return cell
         }
         
-        return cell
+        let indexOfLastCell = tableView.numberOfRows(inSection: indexPath.section) - 1
+        let showDivider = indexPath.row != indexOfLastCell
+        forecastInformationCell.shouldShowDivider(showDivider)
+        return forecastInformationCell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

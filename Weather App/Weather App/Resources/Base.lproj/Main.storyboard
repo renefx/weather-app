@@ -479,6 +479,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="divider" destination="WLF-rG-XpV" id="2IG-0f-NKO"/>
                                     <outlet property="temperatureLabel" destination="Pe9-zC-xeB" id="V1M-SK-iZU"/>
                                     <outlet property="weatherImage" destination="PfD-L7-bax" id="nLI-Hz-1ah"/>
                                     <outlet property="weatherLabel" destination="CE7-2f-zUe" id="kV1-eh-5qw"/>
