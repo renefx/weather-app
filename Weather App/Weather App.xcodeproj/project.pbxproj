@@ -125,12 +125,10 @@
 		F56D856B220F4182000C60FC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F5CB0552220FA33500240690 /* CurrentWeatherTableViewController.swift */,
-				F5CB0550220FA29900240690 /* ForecastTableViewController.swift */,
+				F56D9CDE22106CB20009985E /* Tab Current Weather */,
+				F56D9CDF22106CC70009985E /* Tab Forecast Weather */,
 				F5CB0554220FA9CA00240690 /* ColorfulNavigationViewController.swift */,
 				F5CB0556220FADBA00240690 /* UIViewControllerExtension.swift */,
-				F56D9CD6220FD8230009985E /* ForecastTableViewCell.swift */,
-				F56D9CD822104E6B0009985E /* ForecastSectionHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -161,6 +159,24 @@
 				F56D9CDA22105EA80009985E /* Constants.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		F56D9CDE22106CB20009985E /* Tab Current Weather */ = {
+			isa = PBXGroup;
+			children = (
+				F5CB0552220FA33500240690 /* CurrentWeatherTableViewController.swift */,
+			);
+			path = "Tab Current Weather";
+			sourceTree = "<group>";
+		};
+		F56D9CDF22106CC70009985E /* Tab Forecast Weather */ = {
+			isa = PBXGroup;
+			children = (
+				F5CB0550220FA29900240690 /* ForecastTableViewController.swift */,
+				F56D9CD6220FD8230009985E /* ForecastTableViewCell.swift */,
+				F56D9CD822104E6B0009985E /* ForecastSectionHeader.swift */,
+			);
+			path = "Tab Forecast Weather";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
