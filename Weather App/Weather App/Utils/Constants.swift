@@ -17,3 +17,12 @@ struct OpenWeatherAPI {
     static let apiKey = "b496cbb102e3b82b4e47438315bd449f"
 }
 
+struct NotificationNames {
+    static let locationUpdated = "locationUpdated"
+}
+
+struct LocationDictionaryKeys {
+    static let latitude = "latitude"
+    static let longitude = "longitude"
+}
+

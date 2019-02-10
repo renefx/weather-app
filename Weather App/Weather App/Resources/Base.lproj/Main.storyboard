@@ -393,10 +393,10 @@
             </objects>
             <point key="canvasLocation" x="2127.536231884058" y="-609.78260869565224"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar View Controller-->
         <scene sceneID="rqn-cY-wJP">
             <objects>
-                <tabBarController id="Ixh-hj-eRG" sceneMemberID="viewController">
+                <tabBarController id="Ixh-hj-eRG" customClass="MainTabBarViewController" customModule="Weather_App" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YdJ-ZT-Q2C">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

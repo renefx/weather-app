@@ -21,31 +21,32 @@ class CurrentWeatherTableViewController: UITableViewController {
     @IBOutlet weak var windDirectionLabel: UILabel!
     
     let controller = CurrentWeatherController()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        controller.delegate = self
-        controller.requestAuthorization()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        controller.gatherLocation()
-    }
+    let notificationNameForLocationUpdate = Notification.Name(NotificationNames.locationUpdated)
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(observerForLocationUpdate(notification:)), name: notificationNameForLocationUpdate, object: nil)
     }
     
-    func updateWeatherInformation() {
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: notificationNameForLocationUpdate, object: nil)
     }
     
     @IBAction func shareWeather() {
     }
-}
-
-extension CurrentWeatherTableViewController: CurrentWeatherControllerDelegate {
-    func locationGathered() {
-        updateWeatherInformation()
+    
+    @objc func observerForLocationUpdate(notification: Notification) {
+        guard let location = notification.object as? Dictionary<String,Double>,
+            let latitude = location[LocationDictionaryKeys.latitude],
+            let longitude = location[LocationDictionaryKeys.longitude]  else {
+            return
+        }
+        controller.updateWeatherInformation(latitude, longitude) { (jsonResult) -> () in
+            
+        }
+    }
+    
+    func updateWeatherInformation() {
     }
 }

@@ -37,7 +37,7 @@ class LocationManager: UIViewController {
         locationManager.requestWhenInUseAuthorization()
     }
     
-    func startUpdating(distanceFilter: Double = 1000) {
+    func startUpdating(distanceFilter: Double = 3000) {
         if (isLocationEnabled) {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
@@ -46,7 +46,7 @@ class LocationManager: UIViewController {
         }
     }
     
-    func stopUpdating() {
+    func stopUpdatingLocation() {
         locationManager.stopUpdatingLocation()
     }
 }
@@ -56,8 +56,6 @@ extension LocationManager: CLLocationManagerDelegate {
         guard let currentLocation = locations.last else { return }
         
         delegate?.didUpdateLocations(currentLocation)
-        
-        stopUpdating()
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
