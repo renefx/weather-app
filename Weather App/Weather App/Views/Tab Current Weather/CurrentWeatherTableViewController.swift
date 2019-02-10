@@ -22,9 +22,15 @@ class CurrentWeatherTableViewController: UITableViewController {
     
     let controller = CurrentWeatherController()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        controller.delegate = self
+        controller.requestAuthorization()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateWeatherInformation()
+        controller.gatherLocation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,9 +38,14 @@ class CurrentWeatherTableViewController: UITableViewController {
     }
     
     func updateWeatherInformation() {
-        
     }
     
     @IBAction func shareWeather() {
+    }
+}
+
+extension CurrentWeatherTableViewController: CurrentWeatherControllerDelegate {
+    func locationGathered() {
+        updateWeatherInformation()
     }
 }

@@ -31,7 +31,11 @@ class ColorfulNavigationViewController: UINavigationController {
         let shadowWidth: CGFloat = self.screenWidth / CGFloat(colors.count)
         
         UIGraphicsBeginImageContext(CGSize(width: self.screenWidth, height: shadowHeight))
-        let context = UIGraphicsGetCurrentContext()!
+        guard let context = UIGraphicsGetCurrentContext() else {
+            UIGraphicsEndImageContext()
+            return
+        }
+        
         image.draw(at: CGPoint.zero)
         
         for (index, color) in colors.enumerated() {
