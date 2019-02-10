@@ -12,8 +12,15 @@
 		F56D8552220F411E000C60FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F56D8551220F411E000C60FC /* Assets.xcassets */; };
 		F56D8555220F411E000C60FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F56D8553220F411E000C60FC /* LaunchScreen.storyboard */; };
 		F56D8560220F411F000C60FC /* Weather_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D855F220F411F000C60FC /* Weather_AppTests.swift */; };
+		F56D9CCF220FCCDD0009985E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D9CCE220FCCDD0009985E /* UIColorExtension.swift */; };
+		F56D9CD1220FD5430009985E /* CurrentWeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D9CD0220FD5430009985E /* CurrentWeatherController.swift */; };
+		F56D9CD5220FD75E0009985E /* ForecastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D9CD4220FD75E0009985E /* ForecastController.swift */; };
+		F56D9CD7220FD8230009985E /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D9CD6220FD8230009985E /* ForecastTableViewCell.swift */; };
+		F56D9CD922104E6B0009985E /* ForecastSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D9CD822104E6B0009985E /* ForecastSectionHeader.swift */; };
 		F5CB0551220FA29900240690 /* ForecastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0550220FA29900240690 /* ForecastTableViewController.swift */; };
 		F5CB0553220FA33500240690 /* CurrentWeatherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0552220FA33500240690 /* CurrentWeatherTableViewController.swift */; };
+		F5CB0555220FA9CA00240690 /* ColorfulNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0554220FA9CA00240690 /* ColorfulNavigationViewController.swift */; };
+		F5CB0557220FADBA00240690 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0556220FADBA00240690 /* UIViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,8 +43,15 @@
 		F56D855B220F411F000C60FC /* Weather AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Weather AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F56D855F220F411F000C60FC /* Weather_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather_AppTests.swift; sourceTree = "<group>"; };
 		F56D8561220F411F000C60FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F56D9CCE220FCCDD0009985E /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		F56D9CD0220FD5430009985E /* CurrentWeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherController.swift; sourceTree = "<group>"; };
+		F56D9CD4220FD75E0009985E /* ForecastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastController.swift; sourceTree = "<group>"; };
+		F56D9CD6220FD8230009985E /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
+		F56D9CD822104E6B0009985E /* ForecastSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastSectionHeader.swift; sourceTree = "<group>"; };
 		F5CB0550220FA29900240690 /* ForecastTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewController.swift; sourceTree = "<group>"; };
 		F5CB0552220FA33500240690 /* CurrentWeatherTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherTableViewController.swift; sourceTree = "<group>"; };
+		F5CB0554220FA9CA00240690 /* ColorfulNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulNavigationViewController.swift; sourceTree = "<group>"; };
+		F5CB0556220FADBA00240690 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +97,7 @@
 				F56D856A220F4176000C60FC /* Models */,
 				F56D856B220F4182000C60FC /* Views */,
 				F56D856C220F4195000C60FC /* Controllers */,
+				F56D9CCD220FCCA70009985E /* Utils */,
 				F56D856D220F41BC000C60FC /* Resources */,
 				F56D8556220F411E000C60FC /* Info.plist */,
 			);
@@ -110,6 +125,10 @@
 			children = (
 				F5CB0552220FA33500240690 /* CurrentWeatherTableViewController.swift */,
 				F5CB0550220FA29900240690 /* ForecastTableViewController.swift */,
+				F5CB0554220FA9CA00240690 /* ColorfulNavigationViewController.swift */,
+				F5CB0556220FADBA00240690 /* UIViewControllerExtension.swift */,
+				F56D9CD6220FD8230009985E /* ForecastTableViewCell.swift */,
+				F56D9CD822104E6B0009985E /* ForecastSectionHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -117,6 +136,8 @@
 		F56D856C220F4195000C60FC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F56D9CD0220FD5430009985E /* CurrentWeatherController.swift */,
+				F56D9CD4220FD75E0009985E /* ForecastController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -129,6 +150,14 @@
 				F56D8553220F411E000C60FC /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		F56D9CCD220FCCA70009985E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F56D9CCE220FCCDD0009985E /* UIColorExtension.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,9 +261,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F56D9CD1220FD5430009985E /* CurrentWeatherController.swift in Sources */,
 				F5CB0553220FA33500240690 /* CurrentWeatherTableViewController.swift in Sources */,
 				F5CB0551220FA29900240690 /* ForecastTableViewController.swift in Sources */,
+				F56D9CD922104E6B0009985E /* ForecastSectionHeader.swift in Sources */,
+				F5CB0557220FADBA00240690 /* UIViewControllerExtension.swift in Sources */,
+				F5CB0555220FA9CA00240690 /* ColorfulNavigationViewController.swift in Sources */,
 				F56D854B220F411E000C60FC /* AppDelegate.swift in Sources */,
+				F56D9CD7220FD8230009985E /* ForecastTableViewCell.swift in Sources */,
+				F56D9CD5220FD75E0009985E /* ForecastController.swift in Sources */,
+				F56D9CCF220FCCDD0009985E /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
