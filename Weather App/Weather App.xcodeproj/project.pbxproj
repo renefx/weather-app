@@ -17,6 +17,7 @@
 		F56D9CD5220FD75E0009985E /* ForecastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D9CD4220FD75E0009985E /* ForecastController.swift */; };
 		F56D9CD7220FD8230009985E /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D9CD6220FD8230009985E /* ForecastTableViewCell.swift */; };
 		F56D9CD922104E6B0009985E /* ForecastSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D9CD822104E6B0009985E /* ForecastSectionHeader.swift */; };
+		F56D9CDB22105EA80009985E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D9CDA22105EA80009985E /* Constants.swift */; };
 		F5CB0551220FA29900240690 /* ForecastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0550220FA29900240690 /* ForecastTableViewController.swift */; };
 		F5CB0553220FA33500240690 /* CurrentWeatherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0552220FA33500240690 /* CurrentWeatherTableViewController.swift */; };
 		F5CB0555220FA9CA00240690 /* ColorfulNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0554220FA9CA00240690 /* ColorfulNavigationViewController.swift */; };
@@ -48,6 +49,7 @@
 		F56D9CD4220FD75E0009985E /* ForecastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastController.swift; sourceTree = "<group>"; };
 		F56D9CD6220FD8230009985E /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
 		F56D9CD822104E6B0009985E /* ForecastSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastSectionHeader.swift; sourceTree = "<group>"; };
+		F56D9CDA22105EA80009985E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F5CB0550220FA29900240690 /* ForecastTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewController.swift; sourceTree = "<group>"; };
 		F5CB0552220FA33500240690 /* CurrentWeatherTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherTableViewController.swift; sourceTree = "<group>"; };
 		F5CB0554220FA9CA00240690 /* ColorfulNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulNavigationViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				F56D9CCE220FCCDD0009985E /* UIColorExtension.swift */,
+				F56D9CDA22105EA80009985E /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F56D9CD1220FD5430009985E /* CurrentWeatherController.swift in Sources */,
+				F56D9CDB22105EA80009985E /* Constants.swift in Sources */,
 				F5CB0553220FA33500240690 /* CurrentWeatherTableViewController.swift in Sources */,
 				F5CB0551220FA29900240690 /* ForecastTableViewController.swift in Sources */,
 				F56D9CD922104E6B0009985E /* ForecastSectionHeader.swift in Sources */,
