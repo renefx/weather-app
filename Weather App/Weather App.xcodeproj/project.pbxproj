@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		F56D854B220F411E000C60FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D854A220F411E000C60FC /* AppDelegate.swift */; };
-		F56D854D220F411E000C60FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D854C220F411E000C60FC /* ViewController.swift */; };
 		F56D8550220F411E000C60FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F56D854E220F411E000C60FC /* Main.storyboard */; };
 		F56D8552220F411E000C60FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F56D8551220F411E000C60FC /* Assets.xcassets */; };
 		F56D8555220F411E000C60FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F56D8553220F411E000C60FC /* LaunchScreen.storyboard */; };
 		F56D8560220F411F000C60FC /* Weather_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D855F220F411F000C60FC /* Weather_AppTests.swift */; };
+		F5CB0551220FA29900240690 /* ForecastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0550220FA29900240690 /* ForecastTableViewController.swift */; };
+		F5CB0553220FA33500240690 /* CurrentWeatherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0552220FA33500240690 /* CurrentWeatherTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +29,6 @@
 /* Begin PBXFileReference section */
 		F56D8547220F411E000C60FC /* Weather App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F56D854A220F411E000C60FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F56D854C220F411E000C60FC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F56D854F220F411E000C60FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F56D8551220F411E000C60FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F56D8554220F411E000C60FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +36,8 @@
 		F56D855B220F411F000C60FC /* Weather AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Weather AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F56D855F220F411F000C60FC /* Weather_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather_AppTests.swift; sourceTree = "<group>"; };
 		F56D8561220F411F000C60FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F5CB0550220FA29900240690 /* ForecastTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewController.swift; sourceTree = "<group>"; };
+		F5CB0552220FA33500240690 /* CurrentWeatherTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +108,8 @@
 		F56D856B220F4182000C60FC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F56D854C220F411E000C60FC /* ViewController.swift */,
+				F5CB0552220FA33500240690 /* CurrentWeatherTableViewController.swift */,
+				F5CB0550220FA29900240690 /* ForecastTableViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -229,7 +232,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F56D854D220F411E000C60FC /* ViewController.swift in Sources */,
+				F5CB0553220FA33500240690 /* CurrentWeatherTableViewController.swift in Sources */,
+				F5CB0551220FA29900240690 /* ForecastTableViewController.swift in Sources */,
 				F56D854B220F411E000C60FC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
