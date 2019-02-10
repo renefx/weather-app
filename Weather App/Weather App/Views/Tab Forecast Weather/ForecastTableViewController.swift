@@ -45,7 +45,7 @@ class ForecastTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "weatherInformationIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.weatherInformationIdentifier, for: indexPath)
         guard let forecastInformationCell = cell as? ForecastTableViewCell else {
             return cell
         }

@@ -12,8 +12,13 @@ struct Titles {
     static let APP_NAME = "Weather App"
 }
 
+struct CellIdentifier {
+    static let weatherInformationIdentifier = "weatherInformationIdentifier"
+}
+
 struct OpenWeatherAPI {
-    static let url = "api.openweathermap.org/data/2.5/forecast?"
+    static let urlCurrentWeather = "https://api.openweathermap.org/data/2.5/weather?"
+    static let urlForecast = "https://api.openweathermap.org/data/2.5/forecast?"
     static let apiKey = "b496cbb102e3b82b4e47438315bd449f"
 }
 
