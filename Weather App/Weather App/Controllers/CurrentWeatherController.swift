@@ -12,25 +12,28 @@ import Alamofire
 
 class CurrentWeatherController {
     
-    open func updateWeatherInformation(_ latitude: Double,_ longitude: Double, handlerJsonResult: @escaping (Any?) -> ()) {
+    func updateWeatherInformation(_ latitude: Double,_ longitude: Double, handlerJsonResult: @escaping (Any?) -> ()) {
         guard Connectivity.isConnectedToInternet() else {
             handlerJsonResult(true)
             return
         }
-        
+        let latitude1 = 25.275581
+        let longitude1 = 51.535682
         let url = OpenWeatherAPI.urlCurrentWeather +
-            "lat=\(latitude)&lon=\(longitude)&appid=" +
+            "lat=\(latitude1)&lon=\(longitude1)&units=metric&appid=" +
             OpenWeatherAPI.apiKey
         
         Alamofire.request(url).responseJSON { response in
-            if let json = response.result.value {
-                print("JSON: \(json)")
-            }
             
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)")
+            if let data = response.data {
+                let jsonDecoder = JSONDecoder()
+                do {
+                    let weather = try jsonDecoder.decode(WeatherResponse.self, from: data)
+                } catch let error {
+                    handlerJsonResult(true)
+                    return
+                }
             }
         }
-        print(url)
     }
 }
