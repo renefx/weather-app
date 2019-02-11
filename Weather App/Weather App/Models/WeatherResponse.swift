@@ -19,7 +19,7 @@ struct WeatherResponse: Codable {
     let city: String
     
     var iconName: String {
-        get { return description.count > 0 ? description[0].icon : "" }
+        get { return description.count > 0 ? description[0].icon : General.none }
     }
     
     var cityFullName: String {
@@ -27,13 +27,13 @@ struct WeatherResponse: Codable {
     }
     
     var weatherTitle: String {
-        get { return description.count > 0 ? description[0].title : "" }
+        get { return description.count > 0 ? description[0].title : General.none }
     }
     
     var precipitation: String {
         get {
             guard let rain = rain else {
-                return "-"
+                return General.dash
             }
             if let lastHour = rain.lastHour {
                 return "\(lastHour.toStringWithOneDecimal) mm"
@@ -65,7 +65,7 @@ struct WeatherResponse: Codable {
         let timeInterval: TimeInterval = try container.decode(TimeInterval.self, forKey: .date)
         self.date = Date(timeIntervalSince1970: timeInterval)
         let countryName = try container.decode(Country.self, forKey: .country)
-        self.country = Locale.current.localizedString(forRegionCode: countryName.countryCode) ?? ""
+        self.country = Locale.current.localizedString(forRegionCode: countryName.countryCode) ?? General.none
         self.city = try container.decode(String.self, forKey: .city)
     }
 }

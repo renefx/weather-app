@@ -49,7 +49,7 @@ struct WeatherDescription: Codable {
         case "50d", "50n":
             iconName =   "mist"
         default:
-            iconName = ""
+            iconName = General.none
         }
         self.icon = openWeatherIconName.contains("d") ? "\(iconName)-day" : "\(iconName)-night"
     }

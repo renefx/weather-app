@@ -27,7 +27,7 @@ class ForecastSectionHeader: UIView {
         super.init(coder: aDecoder)
     }
     
-    func addViews(toFrame: CGRect, title: String = "", hideTopLine: Bool = false) {
+    func addViews(toFrame: CGRect, title: String = General.none, hideTopLine: Bool = false) {
         
         if hideTopLine {
             let topLine = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: lineHeight))

@@ -29,7 +29,7 @@ struct Wind: Codable {
             let index = Int((degree + 22.5) / 45.0) & 7
             self.direction = directions[index]
         } else {
-            self.direction = ""
+            self.direction = General.none
         }
     }
 }
