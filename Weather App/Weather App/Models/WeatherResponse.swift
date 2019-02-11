@@ -33,12 +33,12 @@ struct WeatherResponse: Codable {
     var precipitation: String {
         get {
             guard let rain = rain else {
-                return "- mm"
+                return "-"
             }
             if let lastHour = rain.lastHour {
-                return "\(lastHour) mm"
+                return "\(lastHour.toStringWithOneDecimal) mm"
             } else if let lastThreeHours = rain.lastThreeHours {
-                return "\(lastThreeHours) mm"
+                return "\(lastThreeHours.toStringWithOneDecimal) mm"
             }
             return "0 mm"
         }

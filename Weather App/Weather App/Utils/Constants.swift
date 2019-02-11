@@ -8,8 +8,14 @@
 
 import Foundation
 
-struct Titles {
-    static let APP_NAME = "Weather App"
+struct General {
+    static let none = ""
+    static let dash = "-"
+}
+
+struct ErrorMessages {
+    static let noInternet = "No Internet. The weather information is not up to date."
+    static let unexpectedError = "Unexpected Error. The weather information is not up to date."
 }
 
 struct CellIdentifier {
@@ -24,6 +30,10 @@ struct OpenWeatherAPI {
 
 struct NotificationNames {
     static let locationUpdated = "locationUpdated"
+}
+
+struct UserDefaultKeys {
+    static let isFahrenheit = "isFahrenheit"
 }
 
 struct LocationDictionaryKeys {
