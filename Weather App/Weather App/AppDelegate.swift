@@ -7,21 +7,26 @@
 //
 
 import UIKit
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let locationManager = LocationManager()
+    var location: CLLocation?
+    var isLocationEnabled = false
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        locationManager.delegate = self
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        locationManager.stopUpdatingLocation()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -35,12 +40,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        requestAuthorization()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func requestAuthorization() {
+        isLocationEnabled = locationManager.isLocationEnabled
+        if isLocationEnabled {
+            locationManager.startUpdating()
+        } else {
+            locationManager.requestAuthorization()
+        }
+    }
 
 
 }
 
+extension AppDelegate: LocationDelegate {
+    func didChangeAuthorization(_ authorized: Bool) {
+        if authorized && !isLocationEnabled{
+            locationManager.startUpdating()
+        }
+        isLocationEnabled = authorized
+    }
+    
+    func didUpdateLocations(_ location: CLLocation) {
+        let notificationNameForLocationUpdate = Notification.Name(NotificationNames.locationUpdated)
+        let locationDictionary = [LocationDictionaryKeys.latitude: location.coordinate.latitude,
+                                  LocationDictionaryKeys.longitude: location.coordinate.longitude]
+        NotificationCenter.default.post(name: notificationNameForLocationUpdate, object: locationDictionary, userInfo: nil)
+    }
+}

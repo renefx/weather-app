@@ -74,10 +74,9 @@ class CurrentWeatherPresenter {
             delegate?.weatherUpdated(ErrorMessages.noInternet)
             return
         }
-        let latitude1 = 25.275581
-        let longitude1 = 51.535682
+        
         let url = OpenWeatherAPI.urlCurrentWeather +
-            "lat=\(latitude1)&lon=\(longitude1)&units=metric&appid=" +
+            "lat=\(latitude)&lon=\(longitude)&units=metric&appid=" +
             OpenWeatherAPI.apiKey
         
         Alamofire.request(url).responseJSON { response in

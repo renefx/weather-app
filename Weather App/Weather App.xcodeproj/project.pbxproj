@@ -31,7 +31,6 @@
 		F56D9CDB22105EA80009985E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D9CDA22105EA80009985E /* Constants.swift */; };
 		F56D9CE1221078C30009985E /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D9CE0221078C30009985E /* Connectivity.swift */; };
 		F5AC5CF022107FAA00A7C148 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AC5CEF22107FAA00A7C148 /* LocationManager.swift */; };
-		F5AC5CF22210AAEF00A7C148 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AC5CF12210AAEF00A7C148 /* MainTabBarViewController.swift */; };
 		F5CB0551220FA29900240690 /* ForecastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0550220FA29900240690 /* ForecastTableViewController.swift */; };
 		F5CB0553220FA33500240690 /* CurrentWeatherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0552220FA33500240690 /* CurrentWeatherTableViewController.swift */; };
 		F5CB0555220FA9CA00240690 /* ColorfulNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0554220FA9CA00240690 /* ColorfulNavigationViewController.swift */; };
@@ -80,7 +79,6 @@
 		F56D9CDA22105EA80009985E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F56D9CE0221078C30009985E /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		F5AC5CEF22107FAA00A7C148 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		F5AC5CF12210AAEF00A7C148 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		F5CB0550220FA29900240690 /* ForecastTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewController.swift; sourceTree = "<group>"; };
 		F5CB0552220FA33500240690 /* CurrentWeatherTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherTableViewController.swift; sourceTree = "<group>"; };
 		F5CB0554220FA9CA00240690 /* ColorfulNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulNavigationViewController.swift; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 				F56D9CDF22106CC70009985E /* Tab Forecast Weather */,
 				F5CB0554220FA9CA00240690 /* ColorfulNavigationViewController.swift */,
 				F5CB0556220FADBA00240690 /* UIViewControllerExtension.swift */,
-				F5AC5CF12210AAEF00A7C148 /* MainTabBarViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -451,7 +448,6 @@
 				F561E34D221142B0005D875E /* WeatherDescription.swift in Sources */,
 				F56D9CDB22105EA80009985E /* Constants.swift in Sources */,
 				F5CB0553220FA33500240690 /* CurrentWeatherTableViewController.swift in Sources */,
-				F5AC5CF22210AAEF00A7C148 /* MainTabBarViewController.swift in Sources */,
 				F5CB0551220FA29900240690 /* ForecastTableViewController.swift in Sources */,
 				F56D9CD922104E6B0009985E /* ForecastSectionHeader.swift in Sources */,
 				F529BEA72210F7EE0038072B /* ForecastResponse.swift in Sources */,
