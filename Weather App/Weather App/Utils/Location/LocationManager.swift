@@ -14,8 +14,7 @@ protocol LocationDelegate: AnyObject {
     func didUpdateLocations(_ location: CLLocation)
 }
 
-class LocationManager: UIViewController {
-    static let shared = LocationManager()
+class LocationManager: NSObject {
     weak var delegate : LocationDelegate?
     
     let locationManager = CLLocationManager()
@@ -28,16 +27,12 @@ class LocationManager: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     func requestAuthorization() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
     }
     
-    func startUpdating(distanceFilter: Double = 3000) {
+    func startUpdating(distanceFilter: Double = 5000) {
         if (isLocationEnabled) {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation

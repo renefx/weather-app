@@ -10,12 +10,13 @@ import UIKit
 import CoreLocation
 
 class MainTabBarViewController: UITabBarController {
+    let locationManager = LocationManager()
     var location: CLLocation?
     var isLocationEnabled = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        LocationManager.shared.delegate = self
+        locationManager.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,15 +26,15 @@ class MainTabBarViewController: UITabBarController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        LocationManager.shared.stopUpdatingLocation()
+        locationManager.stopUpdatingLocation()
     }
     
     func requestAuthorization() {
-        isLocationEnabled = LocationManager.shared.isLocationEnabled
+        isLocationEnabled = locationManager.isLocationEnabled
         if isLocationEnabled {
-            LocationManager.shared.startUpdating()
+            locationManager.startUpdating()
         } else {
-            LocationManager.shared.requestAuthorization()
+            locationManager.requestAuthorization()
         }
     }
 }
@@ -41,7 +42,7 @@ class MainTabBarViewController: UITabBarController {
 extension MainTabBarViewController: LocationDelegate {
     func didChangeAuthorization(_ authorized: Bool) {
         if authorized && !isLocationEnabled{
-            LocationManager.shared.startUpdating()
+            locationManager.startUpdating()
         }
         isLocationEnabled = authorized
     }
