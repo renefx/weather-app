@@ -63,6 +63,25 @@ class CurrentWeatherPresenter {
         get { return weather?.wind.direction ?? General.dash }
     }
     
+    var shareMessage: String {
+        get {
+            return "Hey! It's \(temperature) right now in \(cityFullName)! Check it out!"
+        }
+    }
+    
+    private var cityId: String {
+        get { return weather?.cityId ?? General.none }
+    }
+    
+    var shareLink: URL? {
+        get {
+            if let url = URL(string: "https://openweathermap.org/city/\(cityId)") {
+                return url
+            }
+            return nil
+        }
+    }
+    
     func setDefaultTemperatureScale() {
         let oldValue = UserDefaults.standard.bool(forKey: UserDefaultKeys.isFahrenheit)
         UserDefaults.standard.set(!oldValue, forKey: UserDefaultKeys.isFahrenheit)

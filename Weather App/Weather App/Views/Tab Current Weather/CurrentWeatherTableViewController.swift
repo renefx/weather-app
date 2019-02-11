@@ -41,6 +41,13 @@ class CurrentWeatherTableViewController: UITableViewController {
     
     // MARK: - IBActions
     @IBAction func shareWeather() {
+        let shareMessage = controller.shareMessage
+        let shareImage = UIImage(named: controller.iconName)
+        if let shareLink = controller.shareLink {
+            let shareArray: [Any] = [shareMessage, shareImage, shareLink]
+            let activityViewController = UIActivityViewController(activityItems: shareArray, applicationActivities: nil)
+            self.present(activityViewController, animated: true, completion:  nil)
+        }
     }
     
     @IBAction func changeTemperatureScale(_ sender: Any) {

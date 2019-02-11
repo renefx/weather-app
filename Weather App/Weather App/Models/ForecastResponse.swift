@@ -9,5 +9,19 @@
 import Foundation
 
 struct ForecastResponse: Codable {
-    let list: [WeatherResponse]
+    let forecast: [[WeatherResponse]]
+    
+    private enum CodingKeys: String, CodingKey {
+        case forecast = "list"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let weatherForecast = try container.decodeIfPresent([WeatherResponse].self, forKey: .forecast) {
+            let x: [[WeatherResponse]] = [weatherForecast]
+            self.forecast = x
+        } else {
+            self.forecast = []
+        }
+    }
 }

@@ -17,6 +17,7 @@ struct WeatherResponse: Codable {
     let date: Date
     let country: String
     let city: String
+    let cityId: String
     
     var iconName: String {
         get { return description.count > 0 ? description[0].icon : General.none }
@@ -53,6 +54,7 @@ struct WeatherResponse: Codable {
         case date = "dt"
         case country = "sys"
         case city = "name"
+        case cityId = "id"
     }
     
     init(from decoder: Decoder) throws {
@@ -67,5 +69,7 @@ struct WeatherResponse: Codable {
         let countryName = try container.decode(Country.self, forKey: .country)
         self.country = Locale.current.localizedString(forRegionCode: countryName.countryCode) ?? General.none
         self.city = try container.decode(String.self, forKey: .city)
+        let cityId = try container.decode(Int.self, forKey: .cityId)
+        self.cityId = "\(cityId)"
     }
 }
