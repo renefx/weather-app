@@ -43,7 +43,7 @@ class CurrentWeatherTableViewController: UITableViewController {
             return
         }
         controller.updateWeatherInformation(latitude, longitude) { (jsonResult) -> () in
-            
+            print(jsonResult)
         }
     }
     
