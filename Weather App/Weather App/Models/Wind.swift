@@ -13,7 +13,7 @@ struct Wind: Codable {
     let direction: String
     
     var speedKmh: String {
-        get { return "\(speed ?? 0) km/h" }
+        get { return "\(Int(speed ?? 0)) km/h" }
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -25,7 +25,6 @@ struct Wind: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.speed = try container.decodeIfPresent(Double.self, forKey: .speed)
         if let degree = try container.decodeIfPresent(Double.self, forKey: .direction), degree > 0 {
-            print(degree)
             let directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
             let index = Int((degree + 22.5) / 45.0) & 7
             self.direction = directions[index]
