@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         locationManager.delegate = self
+        locationManager.addObserver()
         return true
     }
 
@@ -45,11 +46,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        locationManager.removeObserver()
     }
     
     func requestAuthorization() {
         isLocationEnabled = locationManager.isLocationEnabled
-        if isLocationEnabled {
+        if isLocationEnabled && LocationManager.userSwitchEnableGps {
             locationManager.startUpdating()
         } else {
             locationManager.requestAuthorization()
@@ -61,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: LocationDelegate {
     func didChangeAuthorization(_ authorized: Bool) {
-        if authorized && !isLocationEnabled{
+        if authorized && !isLocationEnabled && LocationManager.userSwitchEnableGps {
             locationManager.startUpdating()
         }
         isLocationEnabled = authorized

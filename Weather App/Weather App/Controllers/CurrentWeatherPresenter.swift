@@ -81,6 +81,13 @@ class CurrentWeatherPresenter {
         get { return iconName.contains("day") }
     }
     
+    var userIsUsingGps: Bool {
+        get {
+            let isUsingGps = !UserDefaults.standard.bool(forKey: UserDefaultKeys.isNotUsingGps)
+            return isUsingGps
+        }
+    }
+    
     func setDefaultTemperatureScale() {
         let oldValue = UserDefaults.standard.bool(forKey: UserDefaultKeys.isFahrenheit)
         UserDefaults.standard.set(!oldValue, forKey: UserDefaultKeys.isFahrenheit)

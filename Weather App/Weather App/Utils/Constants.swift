@@ -37,6 +37,7 @@ struct OpenWeatherAPI {
 
 struct NotificationNames {
     static let locationUpdated = "locationUpdated"
+    static let changeUpdate = "changeUpdate"
 }
 
 struct UserDefaultKeys {
@@ -44,4 +45,5 @@ struct UserDefaultKeys {
     static let latitude = "latitude"
     static let longitude = "longitude"
     static let cityName = "cityName"
+    static let isNotUsingGps = "isNotUsingGps"
 }

@@ -17,16 +17,47 @@ protocol LocationDelegate: AnyObject {
 class LocationManager: NSObject {
     weak var delegate : LocationDelegate?
     
-    let locationManager = CLLocationManager()
-    var authorizationType = CLAuthorizationStatus.authorizedWhenInUse
-    var currentLocation = CLLocation()
+    private let locationManager = CLLocationManager()
+    private var authorizationType = CLAuthorizationStatus.authorizedWhenInUse
+    private var currentLocation = CLLocation()
+    private let notificationCheckChangeUpdate = Notification.Name(NotificationNames.changeUpdate)
+    
+    static var userSwitchEnableGps: Bool {
+        get {
+            let isUsingGps = !UserDefaults.standard.bool(forKey: UserDefaultKeys.isNotUsingGps)
+            return isUsingGps
+        }
+    }
     
     override init() {
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
     }
     
+    func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(checkChangeUpdate(notification:)), name: notificationCheckChangeUpdate, object: nil)
+    }
+    
+    func removeObserver() {
+        NotificationCenter.default.removeObserver(self, name: notificationCheckChangeUpdate, object: nil)
+    }
+    
+    @objc func checkChangeUpdate(notification: Notification) {
+        guard let userSwitchEnableGps = notification.object as? Bool else {
+            return
+        }
+        
+        UserDefaults.standard.set(!userSwitchEnableGps, forKey: UserDefaultKeys.isNotUsingGps)
+        
+        if userSwitchEnableGps {
+            locationManager.startUpdatingLocation()
+        } else {
+            locationManager.stopUpdatingLocation()
+        }
+    }
+    
     var isLocationEnabled: Bool {
         get {
+            
             return CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == authorizationType
         }
     }

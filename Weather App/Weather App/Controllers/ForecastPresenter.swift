@@ -11,6 +11,7 @@ import Alamofire
 
 protocol ForecastPresenterDelegate: AnyObject {
     func forecastUpdated(_ error: String?)
+    func temperatureScaleChanged()
 }
 
 class ForecastPresenter {
@@ -54,6 +55,13 @@ class ForecastPresenter {
     
     var isConnected: Bool {
         get { return Connectivity.isConnectedToInternet() }
+    }
+    
+    var userIsUsingGps: Bool {
+        get {
+            let isUsingGps = !UserDefaults.standard.bool(forKey: UserDefaultKeys.isNotUsingGps)
+            return isUsingGps
+        }
     }
     
     // MARK: - Section treatment
@@ -109,6 +117,12 @@ class ForecastPresenter {
             return isFahrenheit ? weather.weatherConditions.temperatureFahrenheit : weather.weatherConditions.temperatureCelsius
         }
         return General.none
+    }
+    
+    func setDefaultTemperatureScale() {
+        let oldValue = UserDefaults.standard.bool(forKey: UserDefaultKeys.isFahrenheit)
+        UserDefaults.standard.set(!oldValue, forKey: UserDefaultKeys.isFahrenheit)
+        delegate?.temperatureScaleChanged()
     }
     
     // MARK: - API Connection

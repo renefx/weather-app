@@ -24,7 +24,6 @@ class ForecastTableViewController: UITableViewController {
         super.viewDidLoad()
         controller.delegate = self
         configureRefreshControl()
-        self.navigationItem.title = controller.navigationBarTitle
         
         paintRefreshControl()
         weatherRefreshControl.programaticallyBeginRefreshing(in: tableView)
@@ -33,7 +32,11 @@ class ForecastTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationItem.title = controller.navigationBarTitle
         NotificationCenter.default.addObserver(self, selector: #selector(observerForLocationUpdate(notification:)), name: notificationNameForLocationUpdate, object: nil)
+        if !controller.userIsUsingGps {
+            controller.userRefreshForecastData()
+        }
         tableView.reloadData()
     }
     
@@ -55,6 +58,8 @@ class ForecastTableViewController: UITableViewController {
     }
     
     @objc func userRefreshForecastData(_ sender: Any) {
+        paintRefreshControl()
+        weatherRefreshControl.programaticallyBeginRefreshing(in: tableView)
         controller.userRefreshForecastData()
     }
     
@@ -141,10 +146,19 @@ class ForecastTableViewController: UITableViewController {
         }
         return 90
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        controller.setDefaultTemperatureScale()
+        
+    }
 }
 
 // MARK: - CurrentWeatherPresenterDelegate
 extension ForecastTableViewController: ForecastPresenterDelegate {
+    func temperatureScaleChanged() {
+        tableView.reloadData()
+    }
+    
     func forecastUpdated(_ error: String?) {
         weatherRefreshControl.endRefreshing()
         

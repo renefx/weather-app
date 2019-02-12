@@ -35,6 +35,11 @@ class CurrentWeatherTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(observerForLocationUpdate(notification:)), name: notificationNameForLocationUpdate, object: nil)
         weatherIcon.popUp()
+        if !controller.userIsUsingGps {
+            paintRefreshControl()
+            weatherRefreshControl.programaticallyBeginRefreshing(in: tableView)
+            controller.userRefreshWeatherInformation()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
