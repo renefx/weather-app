@@ -34,10 +34,6 @@ struct NotificationNames {
 
 struct UserDefaultKeys {
     static let isFahrenheit = "isFahrenheit"
-}
-
-struct LocationDictionaryKeys {
     static let latitude = "latitude"
     static let longitude = "longitude"
 }
-

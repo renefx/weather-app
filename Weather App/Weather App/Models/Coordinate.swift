@@ -16,4 +16,9 @@ struct Coordinate: Codable {
         case latitude = "lat"
         case longitude = "lon"
     }
+    
+    init(_ latitude: Double,_ longitude: Double) {
+        self.latitude = latitude
+        self.longitude = longitude
+    }
 }

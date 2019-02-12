@@ -68,9 +68,11 @@ extension AppDelegate: LocationDelegate {
     }
     
     func didUpdateLocations(_ location: CLLocation) {
+        let location = Coordinate(location.coordinate.latitude, location.coordinate.longitude)
+        UserDefaults.standard.set(location.latitude, forKey: UserDefaultKeys.latitude)
+        UserDefaults.standard.set(location.longitude, forKey: UserDefaultKeys.longitude)
+        
         let notificationNameForLocationUpdate = Notification.Name(NotificationNames.locationUpdated)
-        let locationDictionary = [LocationDictionaryKeys.latitude: location.coordinate.latitude,
-                                  LocationDictionaryKeys.longitude: location.coordinate.longitude]
-        NotificationCenter.default.post(name: notificationNameForLocationUpdate, object: locationDictionary, userInfo: nil)
+        NotificationCenter.default.post(name: notificationNameForLocationUpdate, object: location, userInfo: nil)
     }
 }

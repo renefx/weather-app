@@ -82,10 +82,20 @@ class CurrentWeatherPresenter {
         }
     }
     
+    var isDay: Bool {
+        get { return iconName.contains("day") }
+    }
+    
     func setDefaultTemperatureScale() {
         let oldValue = UserDefaults.standard.bool(forKey: UserDefaultKeys.isFahrenheit)
         UserDefaults.standard.set(!oldValue, forKey: UserDefaultKeys.isFahrenheit)
         delegate?.temperatureScaleChanged()
+    }
+    
+    func userRefreshWeatherInformation() {
+        let latitude = UserDefaults.standard.double(forKey: UserDefaultKeys.latitude)
+        let longitude = UserDefaults.standard.double(forKey: UserDefaultKeys.longitude)
+        updateWeatherInformation(latitude, longitude)
     }
     
     func updateWeatherInformation(_ latitude: Double,_ longitude: Double) {

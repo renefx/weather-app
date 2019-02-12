@@ -20,13 +20,15 @@ class CurrentWeatherTableViewController: UITableViewController {
     @IBOutlet weak var windLabel: UILabel!
     @IBOutlet weak var windDirectionLabel: UILabel!
     
-    let controller = CurrentWeatherPresenter()
-    let notificationNameForLocationUpdate = Notification.Name(NotificationNames.locationUpdated)
+    private let controller = CurrentWeatherPresenter()
+    private let notificationNameForLocationUpdate = Notification.Name(NotificationNames.locationUpdated)
+    let weatherRefreshControl = UIRefreshControl()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         controller.delegate = self
+        configureRefreshControl()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -56,17 +58,32 @@ class CurrentWeatherTableViewController: UITableViewController {
     
     // MARK: - Selectors
     @objc func observerForLocationUpdate(notification: Notification) {
-        guard let location = notification.object as? Dictionary<String,Double>,
-            let latitude = location[LocationDictionaryKeys.latitude],
-            let longitude = location[LocationDictionaryKeys.longitude]  else {
+        guard let location = notification.object as? Coordinate else {
             //TO DO: Add alert
             return
         }
-        //TO DO: add loading
-        controller.updateWeatherInformation(latitude, longitude)
+        
+        paintRefreshControl()
+        weatherRefreshControl.beginRefreshing()
+        tableView.setContentOffset(CGPoint(x: 0, y: tableView.contentOffset.y - (weatherRefreshControl.frame.size.height)), animated: true)
+
+        controller.updateWeatherInformation(location.latitude, location.longitude)
+    }
+    
+    @objc func userRefreshWeatherData(_ sender: Any) {
+        controller.userRefreshWeatherInformation()
     }
     
     // MARK: - Updatte Screen
+    func paintRefreshControl() {
+        self.refreshControl?.tintColor = controller.isDay ? Color.primary : Color.secondary
+    }
+    
+    func configureRefreshControl() {
+        self.refreshControl = weatherRefreshControl
+        weatherRefreshControl.addTarget(self, action: #selector(userRefreshWeatherData(_:)), for: .valueChanged)
+    }
+    
     func updateWeatherInformation() {
         weatherIcon.image = UIImage(named: controller.iconName)
         cityLabel.text = controller.cityFullName
@@ -92,11 +109,20 @@ extension CurrentWeatherTableViewController: CurrentWeatherPresenterDelegate {
     }
     
     func weatherUpdated(_ error: String?) {
-        //TO DO: remove loading
+        weatherRefreshControl.endRefreshing()
+        
         guard error == nil else {
             //TO DO: Add alert
             return
         }
         updateWeatherInformation()
+    }
+}
+
+extension UIRefreshControl {
+    func programaticallyBeginRefreshing(in tableView: UITableView) {
+        beginRefreshing()
+        let offsetPoint = CGPoint.init(x: 0, y: -frame.size.height)
+        tableView.setContentOffset(offsetPoint, animated: true)
     }
 }
