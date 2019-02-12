@@ -70,8 +70,8 @@ class ForecastTableViewController: UITableViewController {
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerFrame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: headerHeight)
-        let hideTopLine = section != 0
-        let header = ForecastSectionHeader(frame: headerFrame, title: "TODAY", hideTopLine: hideTopLine)
+        let title = controller.titleForSection(section)
+        let header = ForecastSectionHeader(frame: headerFrame, title: title)
         return header
     }
     
@@ -80,11 +80,11 @@ class ForecastTableViewController: UITableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return controller.numberOfSections
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return controller.rowsForSection(section)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

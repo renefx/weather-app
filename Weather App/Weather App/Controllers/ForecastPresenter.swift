@@ -35,6 +35,27 @@ class ForecastPresenter {
         }
     }
     
+    var numberOfSections: Int {
+        get {
+            return forecast?.daysList.count ?? 1
+        }
+    }
+    
+    func rowsForSection(_ section: Int) -> Int {
+        guard let forecast = forecast, section < forecast.daysList.count else {
+            return 1
+        }
+        return forecast.daysList[section].weathers.count
+    }
+    
+    func titleForSection(_ section: Int) -> String {
+        guard let forecast = forecast, section < forecast.daysList.count else {
+            return General.none
+        }
+        let dateForSection = forecast.daysList[section].dateForGroup
+        return dateForSection.dayOfWeekToday() ?? General.none
+    }
+    
     func userRefreshWeatherInformation() {
         let latitude = UserDefaults.standard.double(forKey: UserDefaultKeys.latitude)
         let longitude = UserDefaults.standard.double(forKey: UserDefaultKeys.longitude)
