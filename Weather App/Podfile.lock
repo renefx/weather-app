@@ -1,16 +1,20 @@
 PODS:
   - Alamofire (4.8.1)
+  - SwipeableTabBarController (1.4.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.8.1)
+  - SwipeableTabBarController (~> 1.4.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - SwipeableTabBarController
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
+  SwipeableTabBarController: 3a393aa51f1c49c4517b05047c2688a6175c634c
 
-PODFILE CHECKSUM: 00cf9f66aa984bfb5b980e71b3bdf25e64bb6756
+PODFILE CHECKSUM: 86c5e68fd7be7f995768d73fe37a9802691f1be4
 
 COCOAPODS: 1.6.0

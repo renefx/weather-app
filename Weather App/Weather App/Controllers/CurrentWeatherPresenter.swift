@@ -94,13 +94,13 @@ class CurrentWeatherPresenter {
         delegate?.temperatureScaleChanged()
     }
     
-    func userRefreshWeatherInformation() {
+    func refreshCurrentWeatherWithStoredData() {
         let latitude = UserDefaults.standard.double(forKey: UserDefaultKeys.latitude)
         let longitude = UserDefaults.standard.double(forKey: UserDefaultKeys.longitude)
-        updateWeatherInformation(latitude, longitude)
+        refreshCurrentWeather(latitude, longitude)
     }
     
-    func updateWeatherInformation(_ latitude: Double,_ longitude: Double) {
+    func refreshCurrentWeather(_ latitude: Double,_ longitude: Double) {
         guard Connectivity.isConnectedToInternet() else {
             delegate?.weatherUpdated(ErrorMessages.noInternet)
             return

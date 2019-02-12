@@ -23,6 +23,9 @@ struct ErrorMessages {
     static let unexpectedError = "No data available\nPull to refresh"
 }
 
+struct SegueIdentifier {
+    static let citySearchIdentifier = "citySearchIdentifier"
+}
 struct CellIdentifier {
     static let weatherInformationIdentifier = "weatherInformationIdentifier"
     static let loadingForecastIdentifier = "loadingForecastIdentifier"

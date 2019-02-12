@@ -34,11 +34,8 @@ class CurrentWeatherTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(observerForLocationUpdate(notification:)), name: notificationNameForLocationUpdate, object: nil)
-        weatherIcon.popUp()
         if !controller.userIsUsingGps {
-            paintRefreshControl()
-            weatherRefreshControl.programaticallyBeginRefreshing(in: tableView)
-            controller.userRefreshWeatherInformation()
+            controller.refreshCurrentWeatherWithStoredData()
         }
     }
     
@@ -64,17 +61,12 @@ class CurrentWeatherTableViewController: UITableViewController {
     
     // MARK: - Selectors
     @objc func observerForLocationUpdate(notification: Notification) {
-        guard let location = notification.object as? Coordinate else {
-            return
-        }
-        
-        paintRefreshControl()
-        weatherRefreshControl.programaticallyBeginRefreshing(in: tableView)
-        controller.updateWeatherInformation(location.latitude, location.longitude)
+        guard let location = notification.object as? Coordinate else { return }
+        defaultCityChanged(location)
     }
     
     @objc func userRefreshWeatherData(_ sender: Any) {
-        controller.userRefreshWeatherInformation()
+        controller.refreshCurrentWeatherWithStoredData()
     }
     
     // MARK: - Update Screen
@@ -87,7 +79,7 @@ class CurrentWeatherTableViewController: UITableViewController {
         weatherRefreshControl.addTarget(self, action: #selector(userRefreshWeatherData(_:)), for: .valueChanged)
     }
     
-    func updateWeatherInformation() {
+    func updateViews() {
         weatherIcon.image = UIImage(named: controller.iconName)
         weatherIcon.popUp()
         
@@ -105,6 +97,13 @@ class CurrentWeatherTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.00001
     }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIdentifier.citySearchIdentifier, let searchCityVC = segue.destination as? SearchCityViewController {
+            searchCityVC.delegate = self
+        }
+    }
 }
 
 // MARK: - CurrentWeatherPresenterDelegate
@@ -115,10 +114,16 @@ extension CurrentWeatherTableViewController: CurrentWeatherPresenterDelegate {
     
     func weatherUpdated(_ error: String?) {
         weatherRefreshControl.endRefreshing()
-        
-        guard error == nil else {
-            return
-        }
-        updateWeatherInformation()
+        guard error == nil else { return }
+        updateViews()
+    }
+}
+
+// MARK: - DefaultCityDelegate
+extension CurrentWeatherTableViewController: DefaultCityDelegate {
+    func defaultCityChanged(_ coordinate: Coordinate) {
+        paintRefreshControl()
+        weatherRefreshControl.programaticallyBeginRefreshing(in: tableView)
+        controller.refreshCurrentWeather(coordinate.latitude, coordinate.longitude)
     }
 }

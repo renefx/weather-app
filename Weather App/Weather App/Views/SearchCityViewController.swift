@@ -15,11 +15,13 @@ class SearchCityViewController: UIViewController {
     @IBOutlet weak var gpsDataSwitch: UISwitch!
     
     let controller = SearchCityPresenter()
+    weak var delegate: DefaultCityDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         gpsDataSwitch.isOn = controller.userSwitchEnableGps
         controller.delegate = self
+        controller.delegateDefaultCity = self
         searchCityField.delegate = self
         searchCityField.becomeFirstResponder()
     }
@@ -39,12 +41,19 @@ class SearchCityViewController: UIViewController {
 }
 
 extension SearchCityViewController: SearchCityPresenterDelegate{
-    func defaultCityChanged() {
-        closeViewController()
-    }
-    
     func cityFound(_ feedback: String?) {
         self.feedbackField.text = feedback
+    }
+    
+    func dismissWithoutChangingCity(){
+        closeViewController()
+    }
+}
+
+extension SearchCityViewController: DefaultCityDelegate{
+    func defaultCityChanged(_ coodinate: Coordinate) {
+        delegate?.defaultCityChanged(coodinate)
+        closeViewController()
     }
 }
 

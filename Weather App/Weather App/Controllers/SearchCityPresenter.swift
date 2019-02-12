@@ -11,12 +11,17 @@ import CoreLocation
 
 protocol SearchCityPresenterDelegate: AnyObject {
     func cityFound(_ feedback: String?)
-    func defaultCityChanged()
+    func dismissWithoutChangingCity()
+}
+
+protocol DefaultCityDelegate: AnyObject {
+    func defaultCityChanged(_ coordinate: Coordinate)
 }
 
 class SearchCityPresenter {
     // MARK: - Variables
     weak var delegate: SearchCityPresenterDelegate?
+    weak var delegateDefaultCity: DefaultCityDelegate?
     private let geocoder = CLGeocoder()
     private var placemark: CLPlacemark?
     
@@ -54,6 +59,7 @@ class SearchCityPresenter {
         guard let placemark = self.placemark,
             let location = placemark.location else {
                 NotificationCenter.default.post(name: notificationStopLocationUpdate, object: continueUsingGPS, userInfo: nil)
+                delegate?.dismissWithoutChangingCity()
                 return
         }
         
@@ -63,7 +69,6 @@ class SearchCityPresenter {
         UserDefaults.standard.set(coordinate.latitude, forKey: UserDefaultKeys.latitude)
         UserDefaults.standard.set(coordinate.longitude, forKey: UserDefaultKeys.longitude)
         
-        NotificationCenter.default.post(name: notificationNameForLocationUpdate, object: location, userInfo: nil)
-        delegate?.defaultCityChanged()
+        delegateDefaultCity?.defaultCityChanged(coordinate)
     }
 }

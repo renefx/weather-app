@@ -14,7 +14,7 @@
         <scene sceneID="OSS-Qz-sZl">
             <objects>
                 <tableViewController id="bDb-rn-8yv" customClass="CurrentWeatherTableViewController" customModule="Weather_App" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HP5-de-jiF">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HP5-de-jiF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -34,6 +34,9 @@
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uoo-sl-dTk">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="100.5"/>
+                                                            <connections>
+                                                                <outletCollection property="gestureRecognizers" destination="RLs-Uk-nFa" appends="YES" id="QoG-qX-WwB"/>
+                                                            </connections>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lJK-ce-gyb">
                                                             <rect key="frame" x="0.0" y="100.5" width="375" height="40"/>
@@ -402,7 +405,7 @@
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="RLs-Uk-nFa">
                     <connections>
-                        <segue destination="tzA-MQ-Ekj" kind="presentation" id="yzX-nD-iFd"/>
+                        <segue destination="tzA-MQ-Ekj" kind="presentation" identifier="citySearchIdentifier" id="yzX-nD-iFd"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -524,7 +527,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="rqn-cY-wJP">
             <objects>
-                <tabBarController id="Ixh-hj-eRG" sceneMemberID="viewController">
+                <tabBarController id="Ixh-hj-eRG" customClass="TabBarController" customModule="Weather_App" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YdJ-ZT-Q2C">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

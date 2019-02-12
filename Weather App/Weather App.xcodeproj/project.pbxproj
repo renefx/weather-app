@@ -34,6 +34,7 @@
 		F56D9CE1221078C30009985E /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56D9CE0221078C30009985E /* Connectivity.swift */; };
 		F5AC5CF022107FAA00A7C148 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AC5CEF22107FAA00A7C148 /* LocationManager.swift */; };
 		F5C70CD32212C24900C3664E /* SearchCityPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C70CD22212C24900C3664E /* SearchCityPresenter.swift */; };
+		F5C70CD52212E1EF00C3664E /* TabBarControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C70CD42212E1EF00C3664E /* TabBarControllerExtension.swift */; };
 		F5CB0551220FA29900240690 /* ForecastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0550220FA29900240690 /* ForecastTableViewController.swift */; };
 		F5CB0553220FA33500240690 /* CurrentWeatherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0552220FA33500240690 /* CurrentWeatherTableViewController.swift */; };
 		F5CB0555220FA9CA00240690 /* ColorfulNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0554220FA9CA00240690 /* ColorfulNavigationViewController.swift */; };
@@ -89,6 +90,7 @@
 		F56D9CE0221078C30009985E /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		F5AC5CEF22107FAA00A7C148 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		F5C70CD22212C24900C3664E /* SearchCityPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityPresenter.swift; sourceTree = "<group>"; };
+		F5C70CD42212E1EF00C3664E /* TabBarControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerExtension.swift; sourceTree = "<group>"; };
 		F5CB0550220FA29900240690 /* ForecastTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewController.swift; sourceTree = "<group>"; };
 		F5CB0552220FA33500240690 /* CurrentWeatherTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherTableViewController.swift; sourceTree = "<group>"; };
 		F5CB0554220FA9CA00240690 /* ColorfulNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulNavigationViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				F5CB0556220FADBA00240690 /* UIViewControllerExtension.swift */,
 				F5F8B00A2212998800176966 /* UIViewExtension.swift */,
 				F5F8B00E2212A9B900176966 /* NoDataTableViewCell.swift */,
+				F5C70CD42212E1EF00C3664E /* TabBarControllerExtension.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -427,12 +430,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Weather App/Pods-Weather App-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeableTabBarController/SwipeableTabBarController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeableTabBarController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -469,6 +474,7 @@
 				F5608EC72212B8F100B46416 /* SearchCityViewController.swift in Sources */,
 				F56D9CD7220FD8230009985E /* ForecastTableViewCell.swift in Sources */,
 				F561E34F221142D7005D875E /* WeatherConditions.swift in Sources */,
+				F5C70CD52212E1EF00C3664E /* TabBarControllerExtension.swift in Sources */,
 				F561E35722114336005D875E /* Country.swift in Sources */,
 				F56D9CD5220FD75E0009985E /* ForecastPresenter.swift in Sources */,
 				F5F8B0052212814500176966 /* DayWeathers.swift in Sources */,
