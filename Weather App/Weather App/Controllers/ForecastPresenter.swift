@@ -14,9 +14,11 @@ protocol ForecastPresenterDelegate: AnyObject {
 }
 
 class ForecastPresenter {
+    // MARK: - Variables
     weak var delegate: ForecastPresenterDelegate?
     var forecast: ForecastResponse?
     
+    // MARK: - Computated Variables
     var isDay: Bool {
         get {
             if let currentWeather = forecast?.daysList.first?.weathers.first {
@@ -41,6 +43,7 @@ class ForecastPresenter {
         }
     }
     
+    // MARK: - Section treatment
     func rowsForSection(_ section: Int) -> Int {
         guard let forecast = forecast, section < forecast.daysList.count else {
             return 1
@@ -53,9 +56,49 @@ class ForecastPresenter {
             return General.none
         }
         let dateForSection = forecast.daysList[section].dateForGroup
-        return dateForSection.dayOfWeekToday() ?? General.none
+        return dateForSection.dayOfWeekToday ?? General.none
     }
     
+    // MARK: - Cell treatment
+    func getWeather(atIndexPath indexPath: IndexPath) -> WeatherResponse? {
+        let section = indexPath.section
+        let row = indexPath.row
+        guard let forecast = forecast, section < forecast.daysList.count, row < forecast.daysList[section].weathers.count else {
+            return nil
+        }
+        return forecast.daysList[section].weathers[row]
+    }
+    
+    func iconNameForCell(atIndexPath indexPath: IndexPath) -> String {
+        if let weather = getWeather(atIndexPath: indexPath) {
+            return weather.iconName
+        }
+        return General.none
+    }
+    
+    func timeForCell(atIndexPath indexPath: IndexPath) -> String {
+        if let weather = getWeather(atIndexPath: indexPath) {
+            return weather.date.hourMinutes
+        }
+        return General.noTime
+    }
+    
+    func weatherTitleForCell(atIndexPath indexPath: IndexPath) -> String {
+        if let weather = getWeather(atIndexPath: indexPath), let title = weather.description.first?.description {
+            return title.capitalized
+        }
+        return General.none
+    }
+    
+    func temperatureForCell(atIndexPath indexPath: IndexPath) -> String {
+        if let weather = getWeather(atIndexPath: indexPath) {
+            let isFahrenheit = UserDefaults.standard.bool(forKey: UserDefaultKeys.isFahrenheit)
+            return isFahrenheit ? weather.weatherConditions.temperatureFahrenheit : weather.weatherConditions.temperatureCelsius
+        }
+        return General.none
+    }
+    
+    // MARK: - API Connection
     func userRefreshWeatherInformation() {
         let latitude = UserDefaults.standard.double(forKey: UserDefaultKeys.latitude)
         let longitude = UserDefaults.standard.double(forKey: UserDefaultKeys.longitude)

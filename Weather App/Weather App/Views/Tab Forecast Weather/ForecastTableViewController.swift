@@ -94,9 +94,14 @@ class ForecastTableViewController: UITableViewController {
             return cell
         }
         
-        let indexOfLastCell = tableView.numberOfRows(inSection: indexPath.section) - 1
-        let showDivider = indexPath.row != indexOfLastCell
+        let section = indexPath.section
+        let showDivider = indexPath.row != controller.rowsForSection(section) - 1
         forecastInformationCell.shouldShowDivider(showDivider)
+        
+        forecastInformationCell.weatherImage.image = UIImage(named: controller.iconNameForCell(atIndexPath: indexPath))
+        forecastInformationCell.weatherTime.text = controller.timeForCell(atIndexPath: indexPath)
+        forecastInformationCell.weatherLabel.text = controller.weatherTitleForCell(atIndexPath: indexPath)
+        forecastInformationCell.temperatureLabel.text = controller.temperatureForCell(atIndexPath: indexPath)
         return forecastInformationCell
     }
     
