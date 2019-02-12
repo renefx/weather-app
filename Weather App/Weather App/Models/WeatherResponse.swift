@@ -44,7 +44,7 @@ struct WeatherResponse: Codable {
             } else if let country = country {
                 return "\(country)"
             }
-            return ""
+            return General.none
         }
     }
     
@@ -85,7 +85,7 @@ struct WeatherResponse: Codable {
         if let cityId = try container.decodeIfPresent(Int.self, forKey: .cityId) {
             self.cityId = "\(cityId)"
         } else {
-            self.cityId = ""
+            self.cityId = General.none
         }
     }
 }

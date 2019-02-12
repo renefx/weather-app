@@ -12,6 +12,7 @@ struct General {
     static let none = ""
     static let dash = "-"
     static let forecastTitle = "Forecast"
+    static let today = "TODAY"
 }
 
 struct ErrorMessages {
