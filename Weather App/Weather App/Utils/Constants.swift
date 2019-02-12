@@ -14,15 +14,19 @@ struct General {
     static let forecastTitle = "Forecast"
     static let today = "TODAY"
     static let noTime = "--:--"
+    static let noWifiImage = "no-wifi"
+    static let sadImage = "sad"
 }
 
 struct ErrorMessages {
-    static let noInternet = "No Internet. The weather information is not up to date."
-    static let unexpectedError = "Unexpected Error. The weather information is not up to date."
+    static let noInternet = "Check your Internet connection\nPull to refresh"
+    static let unexpectedError = "No data available\nPull to refresh"
 }
 
 struct CellIdentifier {
     static let weatherInformationIdentifier = "weatherInformationIdentifier"
+    static let loadingForecastIdentifier = "loadingForecastIdentifier"
+    static let noDataAvailableIdentifier = "noDataAvailableIdentifier"
 }
 
 struct OpenWeatherAPI {

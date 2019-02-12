@@ -29,7 +29,7 @@ class ForecastSectionHeader: UIView {
     
     func addViews(toFrame: CGRect, title: String = General.none, hideTopLine: Bool = false) {
         
-        if hideTopLine {
+        if !hideTopLine {
             let topLine = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: lineHeight))
             topLine.backgroundColor = Color.gray
             self.addSubview(topLine)

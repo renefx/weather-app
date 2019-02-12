@@ -34,6 +34,7 @@ class CurrentWeatherTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(observerForLocationUpdate(notification:)), name: notificationNameForLocationUpdate, object: nil)
+        weatherIcon.popUp()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -59,7 +60,6 @@ class CurrentWeatherTableViewController: UITableViewController {
     // MARK: - Selectors
     @objc func observerForLocationUpdate(notification: Notification) {
         guard let location = notification.object as? Coordinate else {
-            //TO DO: Add alert
             return
         }
         
@@ -84,6 +84,8 @@ class CurrentWeatherTableViewController: UITableViewController {
     
     func updateWeatherInformation() {
         weatherIcon.image = UIImage(named: controller.iconName)
+        weatherIcon.popUp()
+        
         cityLabel.text = controller.cityFullName
         temperatureLabel.text = controller.temperature
         weatherLabel.text = controller.weatherTitle
@@ -110,7 +112,6 @@ extension CurrentWeatherTableViewController: CurrentWeatherPresenterDelegate {
         weatherRefreshControl.endRefreshing()
         
         guard error == nil else {
-            //TO DO: Add alert
             return
         }
         updateWeatherInformation()

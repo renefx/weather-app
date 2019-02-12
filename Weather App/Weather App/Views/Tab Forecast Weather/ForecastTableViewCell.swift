@@ -24,6 +24,6 @@ class ForecastTableViewCell: UITableViewCell {
     }
     
     func shouldShowDivider(_ isShowing: Bool) {
-        divider.isHidden = isShowing
+        divider.isHidden = !isShowing
     }
 }

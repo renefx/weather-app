@@ -38,6 +38,8 @@
 		F5CB0557220FADBA00240690 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0556220FADBA00240690 /* UIViewControllerExtension.swift */; };
 		F5F8B0052212814500176966 /* DayWeathers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F8B0042212814500176966 /* DayWeathers.swift */; };
 		F5F8B0072212889100176966 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F8B0062212889100176966 /* DateExtension.swift */; };
+		F5F8B00B2212998800176966 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F8B00A2212998800176966 /* UIViewExtension.swift */; };
+		F5F8B00F2212A9B900176966 /* NoDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F8B00E2212A9B900176966 /* NoDataTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		F5CB0556220FADBA00240690 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		F5F8B0042212814500176966 /* DayWeathers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeathers.swift; sourceTree = "<group>"; };
 		F5F8B0062212889100176966 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		F5F8B00A2212998800176966 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		F5F8B00E2212A9B900176966 /* NoDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataTableViewCell.swift; sourceTree = "<group>"; };
 		F89E3B1DA85EC31A34E7D649 /* Pods-Weather AppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather AppTests.release.xcconfig"; path = "Target Support Files/Pods-Weather AppTests/Pods-Weather AppTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -199,6 +203,8 @@
 				F5CB0554220FA9CA00240690 /* ColorfulNavigationViewController.swift */,
 				F50EDF8C22125A0500822218 /* UIRefreshControlExtension.swift */,
 				F5CB0556220FADBA00240690 /* UIViewControllerExtension.swift */,
+				F5F8B00A2212998800176966 /* UIViewExtension.swift */,
+				F5F8B00E2212A9B900176966 /* NoDataTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -434,6 +440,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5F8B00F2212A9B900176966 /* NoDataTableViewCell.swift in Sources */,
 				F56D9CD1220FD5430009985E /* CurrentWeatherPresenter.swift in Sources */,
 				F561E351221142F5005D875E /* Wind.swift in Sources */,
 				F529BEA52210F7DC0038072B /* WeatherResponse.swift in Sources */,
@@ -458,6 +465,7 @@
 				F56D9CD5220FD75E0009985E /* ForecastPresenter.swift in Sources */,
 				F5F8B0052212814500176966 /* DayWeathers.swift in Sources */,
 				F56D9CCF220FCCDD0009985E /* UIColorExtension.swift in Sources */,
+				F5F8B00B2212998800176966 /* UIViewExtension.swift in Sources */,
 				F5AC5CF022107FAA00A7C148 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

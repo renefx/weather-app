@@ -16,7 +16,7 @@ protocol ForecastPresenterDelegate: AnyObject {
 class ForecastPresenter {
     // MARK: - Variables
     weak var delegate: ForecastPresenterDelegate?
-    var forecast: ForecastResponse?
+    private var forecast: ForecastResponse?
     
     // MARK: - Computated Variables
     var isDay: Bool {
@@ -41,6 +41,19 @@ class ForecastPresenter {
         get {
             return forecast?.daysList.count ?? 1
         }
+    }
+    
+    var existForecast: Bool {
+        get {
+            if let forecast = forecast, forecast.daysList.count > 0 {
+                return true
+            }
+            return false
+        }
+    }
+    
+    var isConnected: Bool {
+        get { return Connectivity.isConnectedToInternet() }
     }
     
     // MARK: - Section treatment
@@ -99,13 +112,13 @@ class ForecastPresenter {
     }
     
     // MARK: - API Connection
-    func userRefreshWeatherInformation() {
+    func userRefreshForecastData() {
         let latitude = UserDefaults.standard.double(forKey: UserDefaultKeys.latitude)
         let longitude = UserDefaults.standard.double(forKey: UserDefaultKeys.longitude)
-        updateWeatherInformation(latitude, longitude)
+        updateForecast(latitude, longitude)
     }
     
-    func updateWeatherInformation(_ latitude: Double,_ longitude: Double) {
+    func updateForecast(_ latitude: Double,_ longitude: Double) {
         guard Connectivity.isConnectedToInternet() else {
             delegate?.forecastUpdated(ErrorMessages.noInternet)
             return

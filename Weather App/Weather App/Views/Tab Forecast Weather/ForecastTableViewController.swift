@@ -28,12 +28,13 @@ class ForecastTableViewController: UITableViewController {
         
         paintRefreshControl()
         weatherRefreshControl.programaticallyBeginRefreshing(in: tableView)
-        controller.userRefreshWeatherInformation()
+        controller.userRefreshForecastData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(observerForLocationUpdate(notification:)), name: notificationNameForLocationUpdate, object: nil)
+        tableView.reloadData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -44,17 +45,17 @@ class ForecastTableViewController: UITableViewController {
     // MARK: - Selectors
     @objc func observerForLocationUpdate(notification: Notification) {
         guard let location = notification.object as? Coordinate else {
-            //TO DO: Add alert
+            tableView.reloadData()
             return
         }
         
         paintRefreshControl()
         weatherRefreshControl.programaticallyBeginRefreshing(in: tableView)
-        controller.updateWeatherInformation(location.latitude, location.longitude)
+        controller.updateForecast(location.latitude, location.longitude)
     }
     
-    @objc func userRefreshWeatherData(_ sender: Any) {
-        controller.userRefreshWeatherInformation()
+    @objc func userRefreshForecastData(_ sender: Any) {
+        controller.userRefreshForecastData()
     }
     
     // MARK: - Update Screen
@@ -64,7 +65,7 @@ class ForecastTableViewController: UITableViewController {
     
     func configureRefreshControl() {
         self.refreshControl = weatherRefreshControl
-        weatherRefreshControl.addTarget(self, action: #selector(userRefreshWeatherData(_:)), for: .valueChanged)
+        weatherRefreshControl.addTarget(self, action: #selector(userRefreshForecastData(_:)), for: .valueChanged)
     }
 
     // MARK: - Table view data source
@@ -76,6 +77,7 @@ class ForecastTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if !controller.existForecast { return 0 }
         return headerHeight
     }
 
@@ -88,6 +90,27 @@ class ForecastTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard controller.existForecast else {
+            if let refreshControl = self.refreshControl, refreshControl.isRefreshing {
+                let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.loadingForecastIdentifier, for: indexPath)
+                return cell
+            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.noDataAvailableIdentifier, for: indexPath)
+            guard let noDataCell = cell as? NoDataTableViewCell else {
+                return cell
+            }
+            
+            if controller.isConnected {
+                noDataCell.noDataImage.image = UIImage(named: General.sadImage)
+                noDataCell.noDataMessage.text = ErrorMessages.unexpectedError
+            } else {
+                noDataCell.noDataImage.image = UIImage(named: General.noWifiImage)
+                noDataCell.noDataMessage.text = ErrorMessages.noInternet
+            }
+            
+            return noDataCell
+        }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.weatherInformationIdentifier, for: indexPath)
         guard let forecastInformationCell = cell as? ForecastTableViewCell else {
@@ -102,10 +125,20 @@ class ForecastTableViewController: UITableViewController {
         forecastInformationCell.weatherTime.text = controller.timeForCell(atIndexPath: indexPath)
         forecastInformationCell.weatherLabel.text = controller.weatherTitleForCell(atIndexPath: indexPath)
         forecastInformationCell.temperatureLabel.text = controller.temperatureForCell(atIndexPath: indexPath)
+        
+        forecastInformationCell.weatherImage.popUp()
+        forecastInformationCell.temperatureLabel.popUp()
         return forecastInformationCell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        guard controller.existForecast else {
+            if let refreshControl = self.refreshControl, refreshControl.isRefreshing {
+                return 100
+            }
+            return 250
+        }
         return 90
     }
 }
@@ -116,7 +149,7 @@ extension ForecastTableViewController: ForecastPresenterDelegate {
         weatherRefreshControl.endRefreshing()
         
         guard error == nil else {
-            //TO DO: Add alert
+            tableView.reloadData()
             return
         }
         tableView.reloadData()
