@@ -24,7 +24,12 @@ struct WeatherResponse: Codable {
     }
     
     var cityFullName: String {
-        get { return "\(city), \(country)" }
+        get {
+            if country == General.none {
+                return "\(city)"
+            }
+            return "\(city), \(country)"
+        }
     }
     
     var weatherTitle: String {
