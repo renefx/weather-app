@@ -15,11 +15,6 @@ protocol CurrentWeatherPresenterDelegate: AnyObject {
     func temperatureScaleChanged()
 }
 
-enum TemperatureScale {
-    case Celsius
-    case Fahrenheit
-}
-
 class CurrentWeatherPresenter {
     weak var delegate: CurrentWeatherPresenterDelegate?
     var weather: WeatherResponse?

@@ -15,9 +15,21 @@ struct WeatherResponse: Codable {
     let wind: Wind
     let rain: Rain?
     let date: Date
-    let country: String
-    let city: String
+    let country: String?
+    let city: String?
     let cityId: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case coordinate = "coord"
+        case description = "weather"
+        case weatherConditions = "main"
+        case wind = "wind"
+        case rain = "rain"
+        case date = "dt"
+        case country = "sys"
+        case city = "name"
+        case cityId = "id"
+    }
     
     var iconName: String {
         get { return description.count > 0 ? description[0].icon : General.none }
@@ -25,10 +37,14 @@ struct WeatherResponse: Codable {
     
     var cityFullName: String {
         get {
-            if country == General.none {
+            if let country = country, let city = city {
+                return "\(city), \(country)"
+            } else if let city = city {
                 return "\(city)"
+            } else if let country = country {
+                return "\(country)"
             }
-            return "\(city), \(country)"
+            return ""
         }
     }
     
@@ -50,18 +66,6 @@ struct WeatherResponse: Codable {
         }
     }
     
-    private enum CodingKeys: String, CodingKey {
-        case coordinate = "coord"
-        case description = "weather"
-        case weatherConditions = "main"
-        case wind = "wind"
-        case rain = "rain"
-        case date = "dt"
-        case country = "sys"
-        case city = "name"
-        case cityId = "id"
-    }
-    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.coordinate = try container.decodeIfPresent(Coordinate.self, forKey: .coordinate)
@@ -72,9 +76,16 @@ struct WeatherResponse: Codable {
         let timeInterval: TimeInterval = try container.decode(TimeInterval.self, forKey: .date)
         self.date = Date(timeIntervalSince1970: timeInterval)
         let countryName = try container.decode(Country.self, forKey: .country)
-        self.country = Locale.current.localizedString(forRegionCode: countryName.countryCode) ?? General.none
-        self.city = try container.decode(String.self, forKey: .city)
-        let cityId = try container.decode(Int.self, forKey: .cityId)
-        self.cityId = "\(cityId)"
+        if let countryCode = countryName.countryCode {
+            self.country = Locale.current.localizedString(forRegionCode: countryCode)
+        } else {
+            self.country = nil
+        }
+        self.city = try container.decodeIfPresent(String.self, forKey: .city)
+        if let cityId = try container.decodeIfPresent(Int.self, forKey: .cityId) {
+            self.cityId = "\(cityId)"
+        } else {
+            self.cityId = ""
+        }
     }
 }

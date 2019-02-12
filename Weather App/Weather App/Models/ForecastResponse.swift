@@ -9,19 +9,38 @@
 import Foundation
 
 struct ForecastResponse: Codable {
-    let forecast: [[WeatherResponse]]
+    let daysList: [DayWeathers]
     
     private enum CodingKeys: String, CodingKey {
-        case forecast = "list"
+        case daysList = "list"
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        if let weatherForecast = try container.decodeIfPresent([WeatherResponse].self, forKey: .forecast) {
-            let x: [[WeatherResponse]] = [weatherForecast]
-            self.forecast = x
+        if let unsortedWeatherForecast = try container.decodeIfPresent([WeatherResponse].self, forKey: .daysList) {
+            let sortedWeatherForecast = unsortedWeatherForecast.sorted {
+                $0.date < $1.date
+            }
+            if let firstWeather = sortedWeatherForecast.first {
+                var oldDate: Date = firstWeather.date
+                var daysList: [DayWeathers] = []
+                var weathersArray: [WeatherResponse] = []
+                for weather in sortedWeatherForecast {
+                    if Calendar.current.isDate(weather.date, inSameDayAs: oldDate) {
+                        weathersArray.append(weather)
+                    } else {
+                        daysList.append(DayWeathers(weathersArray, oldDate))
+                        weathersArray = [weather]
+                        oldDate = weather.date
+                    }
+                }
+                daysList.append(DayWeathers(weathersArray, oldDate))
+                self.daysList = daysList
+            } else {
+                self.daysList = []
+            }
         } else {
-            self.forecast = []
+            self.daysList = []
         }
     }
 }

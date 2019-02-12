@@ -22,7 +22,7 @@ class CurrentWeatherTableViewController: UITableViewController {
     
     private let controller = CurrentWeatherPresenter()
     private let notificationNameForLocationUpdate = Notification.Name(NotificationNames.locationUpdated)
-    let weatherRefreshControl = UIRefreshControl()
+    private let weatherRefreshControl = UIRefreshControl()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -72,7 +72,7 @@ class CurrentWeatherTableViewController: UITableViewController {
         controller.userRefreshWeatherInformation()
     }
     
-    // MARK: - Updatte Screen
+    // MARK: - Update Screen
     func paintRefreshControl() {
         self.refreshControl?.tintColor = controller.isDay ? Color.primary : Color.secondary
     }

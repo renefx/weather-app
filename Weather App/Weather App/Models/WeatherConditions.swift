@@ -12,6 +12,13 @@ struct WeatherConditions: Codable {
     let temperature: Double
     let pressure: Double?
     let humidity: Double?
+    
+    private enum CodingKeys: String, CodingKey {
+        case temperature = "temp"
+        case pressure = "pressure"
+        case humidity = "humidity"
+    }
+    
     var temperatureCelsius: String {
         get { return "\(Int(temperature)) ºC" }
     }
@@ -29,11 +36,5 @@ struct WeatherConditions: Codable {
     
     var pressureHpa: String {
         get { return "\(Int(pressure ?? 0)) hPa" }
-    }
-    
-    private enum CodingKeys: String, CodingKey {
-        case temperature = "temp"
-        case pressure = "pressure"
-        case humidity = "humidity"
     }
 }

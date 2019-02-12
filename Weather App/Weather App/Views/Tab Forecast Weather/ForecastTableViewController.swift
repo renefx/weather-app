@@ -15,12 +15,56 @@ class ForecastTableViewController: UITableViewController {
     let headerHeight: CGFloat = 45
     let lineHeight: CGFloat = 1
     
-    let controller = ForecastController()
+    private let controller = ForecastPresenter()
+    private let notificationNameForLocationUpdate = Notification.Name(NotificationNames.locationUpdated)
+    private let weatherRefreshControl = UIRefreshControl()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        controller.delegate = self
+        configureRefreshControl()
         self.navigationItem.title = controller.navigationBarTitle
+        
+        paintRefreshControl()
+        weatherRefreshControl.programaticallyBeginRefreshing(in: tableView)
+        controller.userRefreshWeatherInformation()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(observerForLocationUpdate(notification:)), name: notificationNameForLocationUpdate, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: notificationNameForLocationUpdate, object: nil)
+    }
+    
+    // MARK: - Selectors
+    @objc func observerForLocationUpdate(notification: Notification) {
+        guard let location = notification.object as? Coordinate else {
+            //TO DO: Add alert
+            return
+        }
+        
+        paintRefreshControl()
+        weatherRefreshControl.programaticallyBeginRefreshing(in: tableView)
+        controller.updateWeatherInformation(location.latitude, location.longitude)
+    }
+    
+    @objc func userRefreshWeatherData(_ sender: Any) {
+        controller.userRefreshWeatherInformation()
+    }
+    
+    // MARK: - Update Screen
+    func paintRefreshControl() {
+        self.refreshControl?.tintColor = controller.isDay ? Color.primary : Color.secondary
+    }
+    
+    func configureRefreshControl() {
+        self.refreshControl = weatherRefreshControl
+        weatherRefreshControl.addTarget(self, action: #selector(userRefreshWeatherData(_:)), for: .valueChanged)
     }
 
     // MARK: - Table view data source
@@ -59,4 +103,18 @@ class ForecastTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
+}
+
+// MARK: - CurrentWeatherPresenterDelegate
+extension ForecastTableViewController: ForecastPresenterDelegate {
+    func forecastUpdated(_ error: String?) {
+        weatherRefreshControl.endRefreshing()
+        
+        guard error == nil else {
+            //TO DO: Add alert
+            return
+        }
+        tableView.reloadData()
+    }
+    
 }
