@@ -37,6 +37,7 @@
 		F5CB0555220FA9CA00240690 /* ColorfulNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0554220FA9CA00240690 /* ColorfulNavigationViewController.swift */; };
 		F5CB0557220FADBA00240690 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CB0556220FADBA00240690 /* UIViewControllerExtension.swift */; };
 		F5F8B0052212814500176966 /* DayWeathers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F8B0042212814500176966 /* DayWeathers.swift */; };
+		F5F8B0072212889100176966 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F8B0062212889100176966 /* DateExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		F5CB0554220FA9CA00240690 /* ColorfulNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorfulNavigationViewController.swift; sourceTree = "<group>"; };
 		F5CB0556220FADBA00240690 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		F5F8B0042212814500176966 /* DayWeathers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeathers.swift; sourceTree = "<group>"; };
+		F5F8B0062212889100176966 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		F89E3B1DA85EC31A34E7D649 /* Pods-Weather AppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather AppTests.release.xcconfig"; path = "Target Support Files/Pods-Weather AppTests/Pods-Weather AppTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -226,6 +228,7 @@
 				F56D9CDA22105EA80009985E /* Constants.swift */,
 				F5AC5CEC22107EB400A7C148 /* ColorPallete */,
 				F56D9CE0221078C30009985E /* Connectivity.swift */,
+				F5F8B0062212889100176966 /* DateExtension.swift */,
 				F5AC5CEF22107FAA00A7C148 /* LocationManager.swift */,
 				F50EDF8A22121E3D00822218 /* DoubleExtension.swift */,
 			);
@@ -442,6 +445,7 @@
 				F56D9CD922104E6B0009985E /* ForecastSectionHeader.swift in Sources */,
 				F50EDF8D22125A0500822218 /* UIRefreshControlExtension.swift in Sources */,
 				F529BEA72210F7EE0038072B /* ForecastResponse.swift in Sources */,
+				F5F8B0072212889100176966 /* DateExtension.swift in Sources */,
 				F5CB0557220FADBA00240690 /* UIViewControllerExtension.swift in Sources */,
 				F5CB0555220FA9CA00240690 /* ColorfulNavigationViewController.swift in Sources */,
 				F56D854B220F411E000C60FC /* AppDelegate.swift in Sources */,
