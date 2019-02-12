@@ -11,6 +11,7 @@ import Foundation
 struct General {
     static let none = ""
     static let dash = "-"
+    static let forecastTitle = "Forecast"
 }
 
 struct ErrorMessages {
@@ -36,4 +37,5 @@ struct UserDefaultKeys {
     static let isFahrenheit = "isFahrenheit"
     static let latitude = "latitude"
     static let longitude = "longitude"
+    static let cityName = "cityName"
 }

@@ -9,4 +9,12 @@
 import Foundation
 
 class ForecastController {
+    var navigationBarTitle: String {
+        get {
+            if let cityName = UserDefaults.standard.string(forKey: UserDefaultKeys.cityName) {
+                return cityName
+            }
+            return General.forecastTitle
+        }
+    }
 }

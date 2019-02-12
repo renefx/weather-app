@@ -68,6 +68,14 @@ extension AppDelegate: LocationDelegate {
     }
     
     func didUpdateLocations(_ location: CLLocation) {
+        CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error) in
+            guard let placemarks = placemarks, let placemark = placemarks.first else {
+                UserDefaults.standard.removeObject(forKey: UserDefaultKeys.cityName)
+                return
+            }
+            UserDefaults.standard.set(placemark.locality, forKey: UserDefaultKeys.cityName)
+        }
+        
         let location = Coordinate(location.coordinate.latitude, location.coordinate.longitude)
         UserDefaults.standard.set(location.latitude, forKey: UserDefaultKeys.latitude)
         UserDefaults.standard.set(location.longitude, forKey: UserDefaultKeys.longitude)

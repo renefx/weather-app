@@ -17,17 +17,17 @@ class ForecastTableViewController: UITableViewController {
     
     let controller = ForecastController()
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = controller.navigationBarTitle
     }
 
     // MARK: - Table view data source
-    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var header: ForecastSectionHeader
         let headerFrame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: headerHeight)
         let hideTopLine = section != 0
-        header = ForecastSectionHeader(frame: headerFrame, title: "TODAY", hideTopLine: hideTopLine)
+        let header = ForecastSectionHeader(frame: headerFrame, title: "TODAY", hideTopLine: hideTopLine)
         return header
     }
     
