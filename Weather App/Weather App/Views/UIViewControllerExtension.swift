@@ -13,12 +13,4 @@ extension UIViewController {
     var screenWidth: CGFloat {
         return UIScreen.main.bounds.size.width
     }
-    
-    var topbarHeight: CGFloat {
-        return self.navigationController?.navigationBar.frame.height ?? 0.0
-    }
-    
-    var topbarWidth: CGFloat {
-        return self.navigationController?.navigationBar.frame.width ?? 0.0
-    }
 }

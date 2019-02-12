@@ -64,9 +64,7 @@ class CurrentWeatherTableViewController: UITableViewController {
         }
         
         paintRefreshControl()
-        weatherRefreshControl.beginRefreshing()
-        tableView.setContentOffset(CGPoint(x: 0, y: tableView.contentOffset.y - (weatherRefreshControl.frame.size.height)), animated: true)
-
+        weatherRefreshControl.programaticallyBeginRefreshing(in: tableView)
         controller.updateWeatherInformation(location.latitude, location.longitude)
     }
     
@@ -116,13 +114,5 @@ extension CurrentWeatherTableViewController: CurrentWeatherPresenterDelegate {
             return
         }
         updateWeatherInformation()
-    }
-}
-
-extension UIRefreshControl {
-    func programaticallyBeginRefreshing(in tableView: UITableView) {
-        beginRefreshing()
-        let offsetPoint = CGPoint.init(x: 0, y: -frame.size.height)
-        tableView.setContentOffset(offsetPoint, animated: true)
     }
 }

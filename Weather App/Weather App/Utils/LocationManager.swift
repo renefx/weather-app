@@ -21,6 +21,10 @@ class LocationManager: NSObject {
     var authorizationType = CLAuthorizationStatus.authorizedWhenInUse
     var currentLocation = CLLocation()
     
+    override init() {
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+    }
+    
     var isLocationEnabled: Bool {
         get {
             return CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == authorizationType
