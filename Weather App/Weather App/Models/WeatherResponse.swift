@@ -9,15 +9,15 @@
 import Foundation
 
 struct WeatherResponse: Codable {
-    let coordinate: Coordinate?
-    let description: [WeatherDescription]
-    let weatherConditions: WeatherConditions
-    let wind: Wind
-    let rain: Rain?
-    let date: Date
-    let country: String?
-    let city: String?
-    let cityId: String
+    var coordinate: Coordinate?
+    var description: [WeatherDescription]
+    var weatherConditions: WeatherConditions
+    var wind: Wind
+    var rain: Rain?
+    var date: Date
+    var country: String?
+    var city: String?
+    var cityId: String
     
     private enum CodingKeys: String, CodingKey {
         case coordinate = "coord"

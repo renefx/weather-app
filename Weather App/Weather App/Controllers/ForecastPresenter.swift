@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol ForecastPresenterDelegate: AnyObject {
-    func forecastUpdated(_ error: String?)
+    func forecastUpdated(_ error: RequestErrors?)
     func temperatureScaleChanged()
 }
 
@@ -18,6 +18,8 @@ class ForecastPresenter {
     // MARK: - Variables
     weak var delegate: ForecastPresenterDelegate?
     private var forecast: ForecastResponse?
+    var service = ServiceConnection()
+    let jsonDecoder = JSONDecoder()
     
     // MARK: - Computated Variables
     var isDay: Bool {
@@ -114,7 +116,7 @@ class ForecastPresenter {
     func temperatureForCell(atIndexPath indexPath: IndexPath) -> String {
         if let weather = getWeather(atIndexPath: indexPath) {
             let isFahrenheit = UserDefaults.standard.bool(forKey: UserDefaultKeys.isFahrenheit)
-            return isFahrenheit ? weather.weatherConditions.temperatureFahrenheit : weather.weatherConditions.temperatureCelsius
+            return isFahrenheit ? weather.weatherConditions.temperatureFahrenheit : weather.weatherConditions.temperatureCelsiusShort
         }
         return General.none
     }
@@ -126,33 +128,30 @@ class ForecastPresenter {
     }
     
     // MARK: - API Connection
-    func userRefreshForecastData() {
+    private func getStoredLocation() -> Coordinate {
         let latitude = UserDefaults.standard.double(forKey: UserDefaultKeys.latitude)
         let longitude = UserDefaults.standard.double(forKey: UserDefaultKeys.longitude)
-        updateForecast(latitude, longitude)
+        return Coordinate(latitude, longitude)
     }
     
-    func updateForecast(_ latitude: Double,_ longitude: Double) {
+    func refreshForecastWeather(_ userCoordinate: Coordinate? = nil) {
         guard Connectivity.isConnectedToInternet() else {
-            delegate?.forecastUpdated(ErrorMessages.noInternet)
+            delegate?.forecastUpdated(.noInternet)
             return
         }
         
-        let url = OpenWeatherAPI.urlForecast +
-            "lat=\(latitude)&lon=\(longitude)&units=metric&appid=" +
-            OpenWeatherAPI.apiKey
+        var coordinate: Coordinate
+        if let userCoordinate = userCoordinate {
+            coordinate = userCoordinate
+        } else {
+            coordinate = Coordinate.getStoredLocation()
+        }
         
-        Alamofire.request(url).responseJSON { response in
-            if let data = response.data {
-                let jsonDecoder = JSONDecoder()
-                do {
-                    self.forecast = try jsonDecoder.decode(ForecastResponse.self, from: data)
-                    self.delegate?.forecastUpdated(nil)
-                } catch {
-                    self.delegate?.forecastUpdated(ErrorMessages.unexpectedError)
-                    return
-                }
-            }
+        let url = ServiceConnection.urlForForecast(coordinate)
+        service.makeHTTPGetRequest(url, ForecastResponse.self) { forecast in
+            self.forecast = forecast
+            let response: RequestErrors? = forecast != nil ? nil : .unexpectedError
+            self.delegate?.forecastUpdated(response)
         }
     }
 }

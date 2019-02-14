@@ -9,7 +9,7 @@
 import Foundation
 
 struct ForecastResponse: Codable {
-    let daysList: [DayWeathers]
+    var daysList: [DayWeathers]
     
     private enum CodingKeys: String, CodingKey {
         case daysList = "list"

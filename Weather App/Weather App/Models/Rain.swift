@@ -9,8 +9,8 @@
 import Foundation
 
 struct Rain: Codable {
-    let lastHour: Double?
-    let lastThreeHours: Double?
+    var lastHour: Double?
+    var lastThreeHours: Double?
     
     private enum CodingKeys: String, CodingKey {
         case lastHour = "1h"

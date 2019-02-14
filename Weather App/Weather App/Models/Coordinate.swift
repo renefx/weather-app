@@ -9,8 +9,8 @@
 import Foundation
 
 struct Coordinate: Codable {
-    let latitude: Double
-    let longitude: Double
+    var latitude: Double
+    var longitude: Double
     
     private enum CodingKeys: String, CodingKey {
         case latitude = "lat"
@@ -20,5 +20,11 @@ struct Coordinate: Codable {
     init(_ latitude: Double,_ longitude: Double) {
         self.latitude = latitude
         self.longitude = longitude
+    }
+    
+    static func getStoredLocation() -> Coordinate {
+        let latitude = UserDefaults.standard.double(forKey: UserDefaultKeys.latitude)
+        let longitude = UserDefaults.standard.double(forKey: UserDefaultKeys.longitude)
+        return Coordinate(latitude, longitude)
     }
 }

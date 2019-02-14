@@ -11,6 +11,7 @@ target 'Weather App' do
   target 'Weather AppTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Fakery', '~> 3.4.0'
   end
 
 end

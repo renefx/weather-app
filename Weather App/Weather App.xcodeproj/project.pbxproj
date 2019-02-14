@@ -13,6 +13,14 @@
 		F50EDF8D22125A0500822218 /* UIRefreshControlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50EDF8C22125A0500822218 /* UIRefreshControlExtension.swift */; };
 		F529BEA52210F7DC0038072B /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F529BEA42210F7DC0038072B /* WeatherResponse.swift */; };
 		F529BEA72210F7EE0038072B /* ForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F529BEA62210F7EE0038072B /* ForecastResponse.swift */; };
+		F52CEB7022144FC70057DF26 /* NoInternetAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52CEB6F22144FC70057DF26 /* NoInternetAlertController.swift */; };
+		F52CEB75221459F10057DF26 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F52CEB72221459F00057DF26 /* Montserrat-Medium.ttf */; };
+		F52CEB76221459F10057DF26 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F52CEB73221459F00057DF26 /* Montserrat-Light.ttf */; };
+		F52CEB77221459F10057DF26 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F52CEB74221459F10057DF26 /* Montserrat-SemiBold.ttf */; };
+		F53F83102214675F00EE1B24 /* ServiceConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53F830F2214675F00EE1B24 /* ServiceConnection.swift */; };
+		F55500242214E27E001FB7B0 /* WeatherConditionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55500232214E27E001FB7B0 /* WeatherConditionsTests.swift */; };
+		F555002622150506001FB7B0 /* ServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F555002522150506001FB7B0 /* ServiceTests.swift */; };
+		F55500282215062D001FB7B0 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55500272215062D001FB7B0 /* Utils.swift */; };
 		F5608EC72212B8F100B46416 /* SearchCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5608EC62212B8F100B46416 /* SearchCityViewController.swift */; };
 		F561E34D221142B0005D875E /* WeatherDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = F561E34C221142B0005D875E /* WeatherDescription.swift */; };
 		F561E34F221142D7005D875E /* WeatherConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F561E34E221142D7005D875E /* WeatherConditions.swift */; };
@@ -65,6 +73,14 @@
 		F50EDF8C22125A0500822218 /* UIRefreshControlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRefreshControlExtension.swift; sourceTree = "<group>"; };
 		F529BEA42210F7DC0038072B /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		F529BEA62210F7EE0038072B /* ForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastResponse.swift; sourceTree = "<group>"; };
+		F52CEB6F22144FC70057DF26 /* NoInternetAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoInternetAlertController.swift; sourceTree = "<group>"; };
+		F52CEB72221459F00057DF26 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		F52CEB73221459F00057DF26 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
+		F52CEB74221459F10057DF26 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		F53F830F2214675F00EE1B24 /* ServiceConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceConnection.swift; sourceTree = "<group>"; };
+		F55500232214E27E001FB7B0 /* WeatherConditionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherConditionsTests.swift; sourceTree = "<group>"; };
+		F555002522150506001FB7B0 /* ServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTests.swift; sourceTree = "<group>"; };
+		F55500272215062D001FB7B0 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F5608EC62212B8F100B46416 /* SearchCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityViewController.swift; sourceTree = "<group>"; };
 		F561E34C221142B0005D875E /* WeatherDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDescription.swift; sourceTree = "<group>"; };
 		F561E34E221142D7005D875E /* WeatherConditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherConditions.swift; sourceTree = "<group>"; };
@@ -142,6 +158,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F52CEB71221459B60057DF26 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F52CEB73221459F00057DF26 /* Montserrat-Light.ttf */,
+				F52CEB72221459F00057DF26 /* Montserrat-Medium.ttf */,
+				F52CEB74221459F10057DF26 /* Montserrat-SemiBold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		F53F830E2214672700EE1B24 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F53F830F2214675F00EE1B24 /* ServiceConnection.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		F56D853E220F411E000C60FC = {
 			isa = PBXGroup;
 			children = (
@@ -180,7 +214,10 @@
 			isa = PBXGroup;
 			children = (
 				F56D855F220F411F000C60FC /* Weather_AppTests.swift */,
+				F55500232214E27E001FB7B0 /* WeatherConditionsTests.swift */,
+				F555002522150506001FB7B0 /* ServiceTests.swift */,
 				F56D8561220F411F000C60FC /* Info.plist */,
+				F55500272215062D001FB7B0 /* Utils.swift */,
 			);
 			path = "Weather AppTests";
 			sourceTree = "<group>";
@@ -211,6 +248,7 @@
 				F50EDF8C22125A0500822218 /* UIRefreshControlExtension.swift */,
 				F5CB0556220FADBA00240690 /* UIViewControllerExtension.swift */,
 				F5F8B00A2212998800176966 /* UIViewExtension.swift */,
+				F52CEB6F22144FC70057DF26 /* NoInternetAlertController.swift */,
 				F5F8B00E2212A9B900176966 /* NoDataTableViewCell.swift */,
 				F5C70CD42212E1EF00C3664E /* TabBarControllerExtension.swift */,
 			);
@@ -220,6 +258,7 @@
 		F56D856C220F4195000C60FC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F53F830E2214672700EE1B24 /* Service */,
 				F5C70CD22212C24900C3664E /* SearchCityPresenter.swift */,
 				F56D9CD0220FD5430009985E /* CurrentWeatherPresenter.swift */,
 				F56D9CD4220FD75E0009985E /* ForecastPresenter.swift */,
@@ -231,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				F56D8551220F411E000C60FC /* Assets.xcassets */,
+				F52CEB71221459B60057DF26 /* Fonts */,
 				F56D854E220F411E000C60FC /* Main.storyboard */,
 				F56D8553220F411E000C60FC /* LaunchScreen.storyboard */,
 			);
@@ -306,6 +346,7 @@
 				F56D8557220F411F000C60FC /* Sources */,
 				F56D8558220F411F000C60FC /* Frameworks */,
 				F56D8559220F411F000C60FC /* Resources */,
+				AC24D1647F27B503B5952A68 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -360,8 +401,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F52CEB77221459F10057DF26 /* Montserrat-SemiBold.ttf in Resources */,
+				F52CEB76221459F10057DF26 /* Montserrat-Light.ttf in Resources */,
 				F56D8555220F411E000C60FC /* LaunchScreen.storyboard in Resources */,
 				F56D8552220F411E000C60FC /* Assets.xcassets in Resources */,
+				F52CEB75221459F10057DF26 /* Montserrat-Medium.ttf in Resources */,
 				F56D8550220F411E000C60FC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,6 +440,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AC24D1647F27B503B5952A68 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Weather AppTests/Pods-Weather AppTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Fakery/Fakery.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Fakery.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Weather AppTests/Pods-Weather AppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D02539851D5BEC3E748B5332 /* [CP] Check Pods Manifest.lock */ = {
@@ -470,9 +536,11 @@
 				F56D854B220F411E000C60FC /* AppDelegate.swift in Sources */,
 				F561E35522114320005D875E /* Coordinate.swift in Sources */,
 				F56D9CE1221078C30009985E /* Connectivity.swift in Sources */,
+				F53F83102214675F00EE1B24 /* ServiceConnection.swift in Sources */,
 				F50EDF8B22121E3D00822218 /* DoubleExtension.swift in Sources */,
 				F5608EC72212B8F100B46416 /* SearchCityViewController.swift in Sources */,
 				F56D9CD7220FD8230009985E /* ForecastTableViewCell.swift in Sources */,
+				F52CEB7022144FC70057DF26 /* NoInternetAlertController.swift in Sources */,
 				F561E34F221142D7005D875E /* WeatherConditions.swift in Sources */,
 				F5C70CD52212E1EF00C3664E /* TabBarControllerExtension.swift in Sources */,
 				F561E35722114336005D875E /* Country.swift in Sources */,
@@ -488,7 +556,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F55500242214E27E001FB7B0 /* WeatherConditionsTests.swift in Sources */,
+				F555002622150506001FB7B0 /* ServiceTests.swift in Sources */,
 				F56D8560220F411F000C60FC /* Weather_AppTests.swift in Sources */,
+				F55500282215062D001FB7B0 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

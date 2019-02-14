@@ -34,6 +34,12 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+        <string>Montserrat-Light.ttf</string>
+        <string>Montserrat-Medium.ttf</string>
+        <string>Montserrat-SemiBold.ttf</string>
+	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

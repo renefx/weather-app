@@ -9,8 +9,8 @@
 import Foundation
 
 struct DayWeathers: Codable {
-    let weathers: [WeatherResponse]
-    let dateForGroup: Date
+    var weathers: [WeatherResponse]
+    var dateForGroup: Date
     
     init(_ weathers: [WeatherResponse],_ dateForGroup: Date) {
         self.weathers = weathers

@@ -37,6 +37,10 @@ class ForecastSectionHeader: UIView {
         
         let paddingLeft: CGFloat = 12
         let label = UILabel(frame: CGRect(x: paddingLeft, y: lineHeight, width: frame.width - paddingLeft, height:  frame.height))
+        
+        if let font = UIFont(name: "Montserrat-Semibold", size: 14) {
+            label.font = font
+        }
         label.backgroundColor = .white
         label.text = title
         self.addSubview(label)

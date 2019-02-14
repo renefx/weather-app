@@ -11,19 +11,33 @@ import CoreLocation
 import Alamofire
 
 protocol CurrentWeatherPresenterDelegate: AnyObject {
-    func weatherUpdated(_ error: String?)
+    func weatherUpdated(_ error: RequestErrors?)
     func temperatureScaleChanged()
 }
 
 class CurrentWeatherPresenter {
     weak var delegate: CurrentWeatherPresenterDelegate?
     var weather: WeatherResponse?
+    var service = ServiceConnection()
+    let jsonDecoder = JSONDecoder()
+    
+    // MARK: - Computed Properties For UI Elements
     var iconName: String {
-        get { return weather?.iconName ?? General.none }
+        get {
+            guard let weather = weather else {
+                return Connectivity.isConnectedToInternet() ? General.reload : General.noWifiImage
+            }
+            return weather.iconName
+        }
     }
     
     var cityFullName: String {
-        get { return weather?.cityFullName ?? General.dash }
+        get {
+            guard let weather = weather else {
+                return Connectivity.isConnectedToInternet() ? ErrorMessages.unexpectedErrorShort : ErrorMessages.noInternetShort
+            }
+            return weather.cityFullName
+        }
     }
     
     var temperature: String {
@@ -68,6 +82,7 @@ class CurrentWeatherPresenter {
         get { return weather?.cityId ?? General.none }
     }
     
+    // MARK: - General Computed Properties
     var shareLink: URL? {
         get {
             if let url = URL(string: "https://openweathermap.org/city/\(cityId)") {
@@ -81,46 +96,40 @@ class CurrentWeatherPresenter {
         get { return iconName.contains("day") }
     }
     
-    var userIsUsingGps: Bool {
+    private var userIsUsingGps: Bool {
         get {
             let isUsingGps = !UserDefaults.standard.bool(forKey: UserDefaultKeys.isNotUsingGps)
             return isUsingGps
         }
     }
     
+    // MARK: - Temperatura
     func setDefaultTemperatureScale() {
         let oldValue = UserDefaults.standard.bool(forKey: UserDefaultKeys.isFahrenheit)
         UserDefaults.standard.set(!oldValue, forKey: UserDefaultKeys.isFahrenheit)
         delegate?.temperatureScaleChanged()
     }
     
-    func refreshCurrentWeatherWithStoredData() {
-        let latitude = UserDefaults.standard.double(forKey: UserDefaultKeys.latitude)
-        let longitude = UserDefaults.standard.double(forKey: UserDefaultKeys.longitude)
-        refreshCurrentWeather(latitude, longitude)
-    }
-    
-    func refreshCurrentWeather(_ latitude: Double,_ longitude: Double) {
+    // MARK: - Request
+    func refreshCurrentWeather(_ userCoordinate: Coordinate? = nil) {
         guard Connectivity.isConnectedToInternet() else {
-            delegate?.weatherUpdated(ErrorMessages.noInternet)
+            self.weather = nil
+            delegate?.weatherUpdated(.noInternet)
             return
         }
         
-        let url = OpenWeatherAPI.urlCurrentWeather +
-            "lat=\(latitude)&lon=\(longitude)&units=metric&appid=" +
-            OpenWeatherAPI.apiKey
+        var coordinate: Coordinate
+        if let userCoordinate = userCoordinate {
+            coordinate = userCoordinate
+        } else {
+            coordinate = Coordinate.getStoredLocation()
+        }
         
-        Alamofire.request(url).responseJSON { response in
-            if let data = response.data {
-                let jsonDecoder = JSONDecoder()
-                do {
-                    self.weather = try jsonDecoder.decode(WeatherResponse.self, from: data)
-                    self.delegate?.weatherUpdated(nil)
-                } catch {
-                    self.delegate?.weatherUpdated(ErrorMessages.unexpectedError)
-                    return
-                }
-            }
+        let url = ServiceConnection.urlForCurrentWeather(coordinate)
+        service.makeHTTPGetRequest(url, WeatherResponse.self) { weather in
+            self.weather = weather
+            let response: RequestErrors? = weather != nil ? nil : .unexpectedError
+            self.delegate?.weatherUpdated(response)
         }
     }
 }

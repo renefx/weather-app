@@ -9,8 +9,8 @@
 import Foundation
 
 struct Wind: Codable {
-    let speed: Double?
-    let direction: String
+    var speed: Double?
+    var direction: String
     
     var speedKmh: String {
         get { return "\(Int(speed ?? 0)) km/h" }

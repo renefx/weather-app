@@ -20,23 +20,21 @@ class CurrentWeatherTableViewController: UITableViewController {
     @IBOutlet weak var windLabel: UILabel!
     @IBOutlet weak var windDirectionLabel: UILabel!
     
-    private let controller = CurrentWeatherPresenter()
+    private let presenter = CurrentWeatherPresenter()
     private let notificationNameForLocationUpdate = Notification.Name(NotificationNames.locationUpdated)
     private let weatherRefreshControl = UIRefreshControl()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        controller.delegate = self
+        presenter.delegate = self
         configureRefreshControl()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(observerForLocationUpdate(notification:)), name: notificationNameForLocationUpdate, object: nil)
-        if !controller.userIsUsingGps {
-            controller.refreshCurrentWeatherWithStoredData()
-        }
+        refreshData()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -46,84 +44,79 @@ class CurrentWeatherTableViewController: UITableViewController {
     
     // MARK: - IBActions
     @IBAction func shareWeather() {
-        let shareMessage = controller.shareMessage
-        let shareImage = UIImage(named: controller.iconName) as Any
-        if let shareLink = controller.shareLink {
-            let shareArray: [Any] = [shareMessage, shareImage, shareLink]
-            let activityViewController = UIActivityViewController(activityItems: shareArray, applicationActivities: nil)
-            self.present(activityViewController, animated: true, completion:  nil)
-        }
+        let shareMessage = presenter.shareMessage
+        let shareImage = UIImage(named: presenter.iconName) as Any
+        let shareLink = presenter.shareLink as Any
+        let shareArray: [Any] = [shareMessage, shareImage, shareLink]
+        let activityViewController = UIActivityViewController(activityItems: shareArray, applicationActivities: nil)
+        self.present(activityViewController, animated: true, completion:  nil)
     }
     
     @IBAction func changeTemperatureScale(_ sender: Any) {
-        controller.setDefaultTemperatureScale()
+        presenter.setDefaultTemperatureScale()
     }
     
     // MARK: - Selectors
     @objc func observerForLocationUpdate(notification: Notification) {
-        guard let location = notification.object as? Coordinate else { return }
-        defaultCityChanged(location)
+        guard let coordinate = notification.object as? Coordinate else { return }
+        refreshData(coordinate)
     }
     
     @objc func userRefreshWeatherData(_ sender: Any) {
-        controller.refreshCurrentWeatherWithStoredData()
+        refreshData(showRefresh: false)
     }
     
-    // MARK: - Update Screen
-    func paintRefreshControl() {
-        self.refreshControl?.tintColor = controller.isDay ? Color.primary : Color.secondary
-    }
-    
+    // MARK: - Refresh Control
     func configureRefreshControl() {
         self.refreshControl = weatherRefreshControl
         weatherRefreshControl.addTarget(self, action: #selector(userRefreshWeatherData(_:)), for: .valueChanged)
     }
     
+    func paintRefreshControl() {
+        self.refreshControl?.tintColor = presenter.isDay ? Color.primary : Color.secondary
+    }
+    
+    // MARK: - Update Screen
+    
+    func refreshData(_ coordinate: Coordinate? = nil, showRefresh: Bool = true) {
+        paintRefreshControl()
+        if showRefresh {
+            weatherRefreshControl.programaticallyBeginRefreshing(in: tableView)
+        }
+        presenter.refreshCurrentWeather(coordinate)
+    }
+    
     func updateViews() {
-        weatherIcon.image = UIImage(named: controller.iconName)
+        weatherIcon.image = UIImage(named: presenter.iconName)
         weatherIcon.popUp()
         
-        cityLabel.text = controller.cityFullName
-        temperatureLabel.text = controller.temperature
-        weatherLabel.text = controller.weatherTitle
-        humidityLabel.text = controller.humidity
-        precipitationLabel.text = controller.precipitation
-        pressureLabel.text = controller.pressure
-        windLabel.text = controller.windSpeed
-        windDirectionLabel.text = controller.windDirection
+        cityLabel.text = presenter.cityFullName
+        temperatureLabel.text = presenter.temperature
+        weatherLabel.text = presenter.weatherTitle
+        humidityLabel.text = presenter.humidity
+        precipitationLabel.text = presenter.precipitation
+        pressureLabel.text = presenter.pressure
+        windLabel.text = presenter.windSpeed
+        windDirectionLabel.text = presenter.windDirection
     }
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.00001
     }
-    
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == SegueIdentifier.citySearchIdentifier, let searchCityVC = segue.destination as? SearchCityViewController {
-            searchCityVC.delegate = self
-        }
-    }
 }
 
 // MARK: - CurrentWeatherPresenterDelegate
 extension CurrentWeatherTableViewController: CurrentWeatherPresenterDelegate {
     func temperatureScaleChanged() {
-        temperatureLabel.text = controller.temperature
+        temperatureLabel.text = presenter.temperature
     }
     
-    func weatherUpdated(_ error: String?) {
+    func weatherUpdated(_ error: RequestErrors?) {
         weatherRefreshControl.endRefreshing()
-        guard error == nil else { return }
         updateViews()
-    }
-}
-
-// MARK: - DefaultCityDelegate
-extension CurrentWeatherTableViewController: DefaultCityDelegate {
-    func defaultCityChanged(_ coordinate: Coordinate) {
-        paintRefreshControl()
-        weatherRefreshControl.programaticallyBeginRefreshing(in: tableView)
-        controller.refreshCurrentWeather(coordinate.latitude, coordinate.longitude)
+        if let error = error, error == .noInternet {
+            self.present(NoInternetAlertController(title: AlertNoInternet.title, message: AlertNoInternet.message, preferredStyle: .alert), animated: true, completion: nil)
+        }
     }
 }

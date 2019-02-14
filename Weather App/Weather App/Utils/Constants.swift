@@ -15,12 +15,36 @@ struct General {
     static let today = "TODAY"
     static let noTime = "--:--"
     static let noWifiImage = "no-wifi"
+    static let reload = "reload"
     static let sadImage = "sad"
 }
 
 struct ErrorMessages {
     static let noInternet = "Check your Internet connection\nPull to refresh"
     static let unexpectedError = "No data available\nPull to refresh"
+    static let noInternetShort = "Check your Internet connection"
+    static let unexpectedErrorShort = "No data available"
+}
+
+enum RequestErrors: String {
+    case noInternet
+    case unexpectedError
+    
+    var message: String {
+        switch self {
+        case .noInternet:
+            return "Check your Internet connection\nPull to refresh"
+        case .unexpectedError:
+            return "No data available\nPull to refresh"
+        }
+    }
+}
+
+struct AlertNoInternet {
+    static let title = "Cellular Data is Turned Off"
+    static let message = "Turn on cellular data or use Wi-Fi to access data."
+    static let settings = "Settings"
+    static let ok = "OK"
 }
 
 struct SegueIdentifier {

@@ -18,11 +18,16 @@ class ColorfulNavigationViewController: UINavigationController {
                                  Color.blueShadow,
                                  Color.yellowShadow,
                                  Color.redShadow]
-        
         setColorsNavigationBarShadow(colors)
+        setNavigationBarFont()
     }
     
-
+    func setNavigationBarFont() {
+        if let font = UIFont(name: "Montserrat-Medium", size: 16) {
+            let attributes = [NSAttributedString.Key.font: font]
+            self.navigationBar.titleTextAttributes = attributes
+        }
+    }
     
     func setColorsNavigationBarShadow(_ colors: [UIColor]) {
         let image = UIImage()

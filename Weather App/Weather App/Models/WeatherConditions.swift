@@ -9,9 +9,9 @@
 import Foundation
 
 struct WeatherConditions: Codable {
-    let temperature: Double
-    let pressure: Double?
-    let humidity: Double?
+    var temperature: Double
+    var pressure: Double?
+    var humidity: Double?
     
     private enum CodingKeys: String, CodingKey {
         case temperature = "temp"
@@ -23,10 +23,14 @@ struct WeatherConditions: Codable {
         get { return "\(Int(temperature)) ºC" }
     }
     
+    var temperatureCelsiusShort: String {
+        get { return "\(Int(temperature))º" }
+    }
+    
     var temperatureFahrenheit: String {
         get {
             let fahrenheit = temperature * 9 / 5 + 32
-            return "\(Int(fahrenheit)) ºF"
+            return "\(Int(fahrenheit)) F"
         }
     }
     

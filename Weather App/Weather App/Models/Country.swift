@@ -9,7 +9,7 @@
 import Foundation
 
 struct Country: Codable {
-    let countryCode: String?
+    var countryCode: String?
     
     private enum CodingKeys: String, CodingKey {
         case countryCode = "country"
