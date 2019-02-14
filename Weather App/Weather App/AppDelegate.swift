@@ -79,8 +79,7 @@ extension AppDelegate: LocationDelegate {
         }
         
         let location = Coordinate(location.coordinate.latitude, location.coordinate.longitude)
-        UserDefaults.standard.set(location.latitude, forKey: UserDefaultKeys.latitude)
-        UserDefaults.standard.set(location.longitude, forKey: UserDefaultKeys.longitude)
+        location.saveCoordinate()
         
         let notificationNameForLocationUpdate = Notification.Name(NotificationNames.locationUpdated)
         NotificationCenter.default.post(name: notificationNameForLocationUpdate, object: location, userInfo: nil)

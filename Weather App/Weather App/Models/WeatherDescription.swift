@@ -28,8 +28,12 @@ struct WeatherDescription: Codable {
         self.description = try container.decode(String.self, forKey: .description)
         
         let openWeatherIconName = try container.decode(String.self, forKey: .icon)
+        self.icon = WeatherDescription.stringToIconName(openWeatherIconName)
+    }
+    
+    static func stringToIconName (_ requestString: String) -> String {
         let iconName: String
-        switch openWeatherIconName {
+        switch requestString {
         case "01d", "01n":
             iconName =   "clear-sky"
         case "02d", "02n":
@@ -49,8 +53,8 @@ struct WeatherDescription: Codable {
         case "50d", "50n":
             iconName =   "mist"
         default:
-            iconName = General.none
+            return General.none
         }
-        self.icon = openWeatherIconName.contains("d") ? "\(iconName)-day" : "\(iconName)-night"
+        return requestString.contains("d") ? "\(iconName)-day" : "\(iconName)-night"
     }
 }

@@ -27,4 +27,9 @@ struct Coordinate: Codable {
         let longitude = UserDefaults.standard.double(forKey: UserDefaultKeys.longitude)
         return Coordinate(latitude, longitude)
     }
+    
+    func saveCoordinate() {
+        UserDefaults.standard.set(self.latitude, forKey: UserDefaultKeys.latitude)
+        UserDefaults.standard.set(self.longitude, forKey: UserDefaultKeys.longitude)
+    }
 }

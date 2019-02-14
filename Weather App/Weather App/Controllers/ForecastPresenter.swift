@@ -17,7 +17,7 @@ protocol ForecastPresenterDelegate: AnyObject {
 class ForecastPresenter {
     // MARK: - Variables
     weak var delegate: ForecastPresenterDelegate?
-    private var forecast: ForecastResponse?
+    var forecast: ForecastResponse?
     var service = ServiceConnection()
     let jsonDecoder = JSONDecoder()
     
@@ -128,12 +128,6 @@ class ForecastPresenter {
     }
     
     // MARK: - API Connection
-    private func getStoredLocation() -> Coordinate {
-        let latitude = UserDefaults.standard.double(forKey: UserDefaultKeys.latitude)
-        let longitude = UserDefaults.standard.double(forKey: UserDefaultKeys.longitude)
-        return Coordinate(latitude, longitude)
-    }
-    
     func refreshForecastWeather(_ userCoordinate: Coordinate? = nil) {
         guard Connectivity.isConnectedToInternet() else {
             delegate?.forecastUpdated(.noInternet)

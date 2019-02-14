@@ -14,7 +14,6 @@ class ServiceTests: XCTestCase {
     let faker = Faker()
 
     func testUrls() {
-        let service = ServiceConnection()
         let randomCoordinate = Coordinate(faker.number.randomDouble(),faker.number.randomDouble())
         let regexUrl = "https://.*lat=\(TestUtil.double)&lon=\(TestUtil.double)&units=metric&appid=.+"
         let checkRegexCurrentWeather = TestUtil.isRegexMatch(regex: regexUrl, in: ServiceConnection.urlForCurrentWeather(randomCoordinate))

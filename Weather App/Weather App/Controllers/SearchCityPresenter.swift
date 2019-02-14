@@ -18,7 +18,7 @@ class SearchCityPresenter {
     // MARK: - Variables
     weak var delegate: SearchCityPresenterDelegate?
     private let geocoder = CLGeocoder()
-    private var placemark: CLPlacemark?
+    var placemark: CLPlacemark?
     
     private let notificationStopLocationUpdate = Notification.Name(NotificationNames.changeUpdate)
     private let notificationNameForLocationUpdate = Notification.Name(NotificationNames.locationUpdated)
@@ -50,7 +50,6 @@ class SearchCityPresenter {
     }
     
     func notifyCityChange(continueUsingGPS: Bool) {
-        
         guard let placemark = self.placemark,
             let location = placemark.location else {
                 NotificationCenter.default.post(name: notificationStopLocationUpdate, object: continueUsingGPS, userInfo: nil)
@@ -61,8 +60,7 @@ class SearchCityPresenter {
         NotificationCenter.default.post(name: notificationStopLocationUpdate, object: false, userInfo: nil)
         UserDefaults.standard.set(placemark.locality, forKey: UserDefaultKeys.cityName)
         let coordinate = Coordinate(location.coordinate.latitude, location.coordinate.longitude)
-        UserDefaults.standard.set(coordinate.latitude, forKey: UserDefaultKeys.latitude)
-        UserDefaults.standard.set(coordinate.longitude, forKey: UserDefaultKeys.longitude)
+        coordinate.saveCoordinate()
         delegate?.didChangeCity()
     }
 }
