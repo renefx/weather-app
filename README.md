@@ -6,7 +6,7 @@ A simple Weather App that shows the current weather information and forecast. Th
 ![preview](./app-weather.gif)
 
 ## Compatibility
-This project is written in Swift 4.2 and requires Xcode 10.1+ to build and run.
+This project is written in Swift 4.2 and requires Xcode 10.1+ & Cocoapods 1.6.0 to build and run.
 
 ## Getting Started
 Navigate to the directory and run pod install. Then open Weather App.xcworkspace to run the project:
